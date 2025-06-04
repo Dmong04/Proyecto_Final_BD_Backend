@@ -1,0 +1,21 @@
+.container {
+  text-align: center;
+  background-color: #022135;
+  color: #f5f5f5;
+}
+
+.content {
+  text-align: center;
+  padding: 2%;
+  background-color: #75b3e7;
+  color: #f5f5f5;
+}
+
+.about {
+  padding-left: 2%;
+  text-align: justify;
+}
+
+.about p {
+  font-size: large;
+}

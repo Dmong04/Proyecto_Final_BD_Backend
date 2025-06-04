@@ -1,0 +1,12 @@
+DROP TABLE coco_tours_db_v3.usuario;
+DROP TABLE coco_tours_db_v3.administrador;
+DROP TABLE coco_tours_db_v3.cliente;
+DROP TABLE coco_tours_db_v3.detalle_extra;
+DROP TABLE coco_tours_db_v3.extra;
+DROP TABLE coco_tours_db_v3.detalle_viaje;
+DROP TABLE coco_tours_db_v3.pasajeros;
+DROP TABLE coco_tours_db_v3.telefonos_proveedor;
+DROP TABLE coco_tours_db_v3.reservas;
+DROP TABLE coco_tours_db_v3.telefonos_cliente;
+DROP TABLE coco_tours_db_v3.viaje;
+DROP TABLE coco_tours_db_v3.proveedor;

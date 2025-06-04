@@ -1,0 +1,22 @@
+@import './base.css';
+@import './../components/HomePage/homepage.css';
+
+.navbar {
+  background-color: #022135;
+}
+
+.navbar a {
+  color: #f5f5f5;
+  transition: 1s ease;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  color: #ffce54;
+}
+
+.footer {
+  background-color: #022135;
+  text-align: center;
+  color: #f5f5f5;
+}
