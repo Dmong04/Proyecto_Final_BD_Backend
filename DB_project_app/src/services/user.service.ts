@@ -8,4 +8,18 @@ export default {
   findUser(username: string) {
     return api.get(`/user/${username}`)
   },
+
+  createUser(userData: {
+    email: string
+    username: string
+    password: string
+    clientId?: number
+    adminId?: number
+  }) {
+    return api.post('/user', userData)
+  },
+
+  updateUser(id: number, userData: { email: string; username: string }) {
+    return api.put(`/user/${id}`, userData)
+  },
 }

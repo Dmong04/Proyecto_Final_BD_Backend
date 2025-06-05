@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import userService from '@/services/user.service'
 import type { User } from '@/models/user'
 
-export function ListUsers() {
+export function UserComponent() {
   const users = ref<User[]>([])
   const loading = ref(false)
   const error = ref(null)

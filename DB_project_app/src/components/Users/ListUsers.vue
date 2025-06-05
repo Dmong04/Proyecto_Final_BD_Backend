@@ -11,6 +11,7 @@
           <th>ID</th>
           <th>Email</th>
           <th>Nombre de Usuario</th>
+          <th>Nombre completo</th>
         </tr>
       </thead>
       <tbody>
@@ -18,8 +19,7 @@
           <td>{{ user.id }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.username }}</td>
-          <td>{{ user.client }}</td>
-          <td>{{ user.admin }}</td>
+          <td>{{ user.client?.name || user.admin?.name }}</td>
         </tr>
       </tbody>
     </table>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ListUsers } from './list-users'
+import { UserComponent } from './user.component'
 
-const { users, loading, error } = ListUsers()
+const { users, loading, error } = UserComponent()
 </script>
