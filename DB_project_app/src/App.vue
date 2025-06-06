@@ -6,7 +6,7 @@
         <i class="bi bi-globe2 me-2 fs-4"></i>Coco's Tours
       </router-link>
 
-      <!-- ENLACES SIN COLAPSO -->
+    
       <div class="navbar-nav ms-auto">
         <router-link to="/users" class="nav-link" active-class="active">
           <i class="bi bi-people me-1"></i>Usuarios

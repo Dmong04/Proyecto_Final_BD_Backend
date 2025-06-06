@@ -7,7 +7,7 @@
 
     <div class="about mx-auto text-start p-4 rounded shadow-sm bg-light" style="max-width: 800px;">
       <h3 class="fw-semibold text-primary mb-3">
-        <i class="bi bi-info-circle me-2"></i>Sobre Nosotros
+        <i class="bi bi-info-circle me-2"></i>Sobre Nosotros · About Us
       </h3>
 
       <p class="mb-3">
