@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "usuario")
 @AllArgsConstructor
@@ -26,4 +28,6 @@ public class User {
     @OneToOne
     @JoinColumn(name = "admin", nullable = true)
     private Admin admin;
+    @OneToMany(mappedBy = "user")
+    private List<Reservation> reservations;
 }
