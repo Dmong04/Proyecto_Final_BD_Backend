@@ -30,4 +30,6 @@ public class DetailTour {
     private Provider provider;
     @OneToMany(mappedBy = "details", cascade = CascadeType.ALL)
     private List<Passenger> passengers;
+    @OneToMany(mappedBy = "detailTour")
+    private List<Reservation> reservations;
 }

@@ -8,20 +8,21 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "extra")
+@Table(name = "detalle_extra")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Extra {
+public class DetailExtra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "nombre")
-    private String name;
-    @Column(name = "descripcion")
-    private String description;
-    @Column(name = "precioPersona")
+    @Column(name = "cantPersona")
+    private int participants;
+    @Column(name = "precioTotal")
     private Integer price;
-    @OneToMany(mappedBy = "extra")
-    private List<DetailExtra> detailsExtra;
+    @ManyToOne
+    @JoinColumn(name = "idExtra")
+    private Extra extra;
+    @OneToMany(mappedBy = "detailExtra")
+    private List<Reservation> reservations;
 }
