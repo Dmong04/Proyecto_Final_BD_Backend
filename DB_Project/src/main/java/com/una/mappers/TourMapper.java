@@ -6,6 +6,7 @@ import com.una.models.Tour;
 public interface TourMapper {
 
     public static TourDTO toDTO(Tour tour) {
+        if (tour == null) return null;
         TourDTO dto = new TourDTO();
         dto.setId(tour.getId());
         dto.setType(tour.getType());
@@ -15,6 +16,7 @@ public interface TourMapper {
     }
 
     public static Tour toEntity(TourDTO dto) {
+        if (dto == null) return null;
         Tour tour = new Tour();
         tour.setId(dto.getId());
         tour.setType(dto.getType());

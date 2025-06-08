@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS detalle_extra
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     cantPersona INT NOT NULL,
-    precioTotal DECIMAL(10, 2) GENERATED ALWAYS AS (cantPersona * 1.0) VIRTUAL,
+    precioTotal DECIMAL(10, 2),
     idExtra     INT NOT NULL,
     FOREIGN KEY (idExtra) REFERENCES extra (id) ON DELETE CASCADE
 );
@@ -101,9 +101,9 @@ CREATE TABLE IF NOT EXISTS reservas
     fecha          DATE         NOT NULL,
     hora           TIME         NOT NULL,
     descripcion    VARCHAR(100) NOT NULL,
-    subtotalViaje  DECIMAL(10, 2) GENERATED ALWAYS AS (0) VIRTUAL,
-    subtotalExtra  DECIMAL(10, 2) GENERATED ALWAYS AS (0) VIRTUAL,
-    total          DECIMAL(10, 2) GENERATED ALWAYS AS (subtotalViaje + subtotalExtra) VIRTUAL,
+    subtotalViaje  DECIMAL(10, 2) DEFAULT 0,
+    subtotalExtra  DECIMAL(10, 2) DEFAULT 0,
+    total          DECIMAL(10, 2) DEFAULT 0,
     idDetalleExtra INT DEFAULT NULL,
     idDetalleViaje INT          NOT NULL,
     idUsuario      INT          NOT NULL,
