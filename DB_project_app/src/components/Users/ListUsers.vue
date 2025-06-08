@@ -5,7 +5,7 @@
     <div v-if="loading" class="alert alert-info">Cargando usuarios...</div>
     <div v-if="error" class="alert alert-danger">Error al cargar usuarios.</div>
 
-    <table v-if="users.length" class="table table-bordered table-striped">
+    <table v-if="users.length" class="table table-striped">
       <thead class="table-dark">
         <tr>
           <th>ID</th>
