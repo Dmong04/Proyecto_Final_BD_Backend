@@ -26,8 +26,6 @@ public class DetailTourService {
         return detailTourRepository.findById(id).map(DetailTourMapper::toDTO);
     }
 
-    // Opción crear métodos para filtrar por playa de origen y destino
-
     public DetailTourDTO createDetail(DetailTourDTO dto) {
         DetailTour detail = DetailTourMapper.toEntity(dto);
         detail = detailTourRepository.save(detail);

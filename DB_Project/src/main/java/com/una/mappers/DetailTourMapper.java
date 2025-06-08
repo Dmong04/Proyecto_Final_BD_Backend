@@ -6,6 +6,7 @@ import com.una.models.DetailTour;
 public interface DetailTourMapper {
 
     public static DetailTourDTO toDTO(DetailTour detailTour) {
+        if (detailTour == null) return null;
         DetailTourDTO dto = new DetailTourDTO();
         dto.setId(detailTour.getId());
         dto.setNumPassengers(detailTour.getNumPassengers());
@@ -22,8 +23,12 @@ public interface DetailTourMapper {
         detailTour.setNumPassengers(dto.getNumPassengers());
         detailTour.setOrigin(dto.getOrigin());
         detailTour.setDestination(dto.getDestination());
-        detailTour.setTour(TourMapper.toEntity(dto.getTour()));
-        detailTour.setProvider(ProviderMapper.toEntity(dto.getProvider()));
+        if (dto.getTour() != null) {
+            detailTour.setTour(TourMapper.toEntity(dto.getTour()));
+        }
+        if (dto.getProvider() != null) {
+            detailTour.setProvider(ProviderMapper.toEntity(dto.getProvider()));
+        }
         return detailTour;
     }
 }
