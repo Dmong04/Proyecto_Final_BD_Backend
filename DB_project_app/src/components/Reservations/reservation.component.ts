@@ -4,7 +4,7 @@ import type { Reservation } from '@/models/reservation'
 
 export function ReservationComponent() {
 
-    const reservatios  = ref<Reservation[]>([])
+    const reservations  = ref<Reservation[]>([])
     const loading = ref(false)
     const error = ref(null)
 
@@ -15,7 +15,7 @@ export function ReservationComponent() {
 
         try {
             const response = await reservationService.getReservations()
-            reservatios.value = response.data
+            reservations.value = response.data
 
         } catch (err: any) {
             console.error('Error al cargar reservas: ', err)
@@ -30,7 +30,7 @@ export function ReservationComponent() {
     })
 
     return {
-        reservatios,
+        reservations,
         loading,
         error,
         reload: loadTours

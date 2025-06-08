@@ -2,7 +2,7 @@ import { ref, onMounted } from 'vue'
 import tourService from '@/services/tour.service'
 import type { Tour } from '@/models/tour'
 
-export function tourComponent() {
+export function TourComponent() {
     const tours = ref<Tour[]>([])
     const loading = ref(false)
     const error = ref(null)
@@ -17,7 +17,7 @@ export function tourComponent() {
             tours.value = response.data
 
         } catch (err: any) {
-            console.error('Error al cargar extras: ', err)
+            console.error('Error al cargar tours: ', err)
             error.value = err
         } finally {
             loading.value = false
