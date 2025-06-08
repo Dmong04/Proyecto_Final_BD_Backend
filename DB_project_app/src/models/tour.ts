@@ -1,4 +1,4 @@
-export class Trip {
+export class Tour {
   constructor(
     public id: number,
     public type: string,

@@ -6,17 +6,18 @@ export interface ReservationData {
     descripcion: string
     subtotalViaje?: number
     subtotalExtra?: number
+    idDetalleExtra?: number | null
+    idDetalleViaje: number
     total?: number
     idUsuario: number
 }
 
 export default {
-    
     getReservations() {
         return api.get('/reservas')
     },
 
-    createReservation( reservationData: ReservationData) {
+    createReservation(reservationData: ReservationData) {
         return api.post('/reservas', reservationData)
     },
 

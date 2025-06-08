@@ -1,4 +1,5 @@
-
+import { ExtraDetail } from './extra_detail'
+import { TripDetail } from './tour_detail'
 import { User } from './user'
 
 export class Reservation {
@@ -10,6 +11,8 @@ export class Reservation {
     public tripSubtotal: number,
     public extraSubtotal: number,
     public total: number,
+    public extraDetail: ExtraDetail | null,
+    public tripDetail: TripDetail,
     public user: User
   ) {}
 }
