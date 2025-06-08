@@ -40,3 +40,18 @@
   font-size: 0.9rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
+/**************************************/
+.dropdown-menu-dark {
+  background-color: #022135;
+  border: none;
+}
+
+.dropdown-menu-dark .dropdown-item {
+  color: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu-dark .dropdown-item:hover {
+  background-color: #1b3b55;
+  color: #ffce54;
+}
