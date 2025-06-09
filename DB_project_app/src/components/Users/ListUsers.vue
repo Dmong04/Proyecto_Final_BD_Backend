@@ -29,7 +29,8 @@
      <nav v-if="pageCount > 1" aria-label="">
 
       <ul class="pagination justify-content-center">
-                <li
+
+        <li
           class="page-item"
           :class="{ disabled: currentPage === 1 }"
           @click="changePage(currentPage - 1)"
@@ -55,7 +56,6 @@
           <a class="page-link" href="#">Siguiente</a>
         </li>
       </ul>
-
      </nav>
   </div>
 </template>

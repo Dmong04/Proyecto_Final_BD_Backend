@@ -1,0 +1,94 @@
+<template>
+
+    <div class="container mt-4">
+
+        <h2>Lista de Tours</h2>
+
+        <div v-if="loading" class="alert alert-info">Cargando tours...</div>
+        <div v-if="error" class="alert alert-danger">Error al cargar tours.</div>
+
+        <table v-if="paginatedTours.length" class="table table-striped">
+
+            <th class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                </tr>
+            </th>
+
+            <tbody>
+                <tr v-for="tour in paginatedTours" :key="tour.id">
+                    <td>{{ tour.id }}</td>
+                    <th>{{ tour.type }}</th>
+                    <th>{{tour.description }}</th>
+                    <th>{{ tour.price.toFixed(2) }}</th>
+
+                </tr>
+            </tbody>
+        </table>
+
+        <nav v-if="pageCount > 1" aria-label="">
+
+             <ul class="pagination justify-content-center">
+
+                <li
+                 class="page-item"
+                 :class="{ disabled: currentPage === 1 }"
+                 @click="changePage(currentPage - 1)"
+                >
+                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                
+                <li
+                 v-for="page in pageCount"
+                 :key="page"
+                 class="page-item"
+                 :class="{ active: currentPage === page }"
+                 @click="changePage(page)"
+                >
+                <a class="page-link" href="#">{{ page }}</a>
+                </li>
+                
+                <li
+                 class="page-item"
+                 :class="{ disabled: currentPage === pageCount }"
+                 @click="changePage(currentPage + 1)"
+                >
+                 <a class="page-link" href="#">Siguiente</a>
+              </li>
+
+            </ul>
+     </nav>
+
+
+    </div>
+
+
+</template>
+
+<script setup lang="ts">
+
+import { ref, computed} from 'vue'
+import { TourComponent } from './tour.component';
+
+const { tours, loading, error } = TourComponent()
+
+const currentPage =  ref(1)
+const pageSize = 10
+
+const pageCount = computed(() => Math.ceil((tours.value?.length || 0) / pageSize))
+
+const paginatedTours = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  return (tours.value || []).slice(start, start + pageSize)
+})
+
+function changePage(page: number) {
+  if (page < 1) page = 1
+  if (page > pageCount.value) page = pageCount.value
+  currentPage.value = page
+}
+
+</script>
