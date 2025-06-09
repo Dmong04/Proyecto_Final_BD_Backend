@@ -8,11 +8,11 @@ export class Reservation {
     public date: Date,
     public time: string,
     public description: string,
-    public tourSubtotal: number,
-    public extraSubtotal: number,
+    public tourPrice: number,
+    public extraPrice: number,
     public total: number,
-    public extraDetail: ExtraDetail | null,
-    public tourDetail: TourDetail,
+    public detailExtra: ExtraDetail | null,
+    public detailTour: TourDetail,
     public user: User
-  ) {}
+  ) { }
 }

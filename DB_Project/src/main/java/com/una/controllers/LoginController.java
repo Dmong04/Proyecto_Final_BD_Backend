@@ -35,16 +35,7 @@ public class LoginController {
         }
         User user = found.get();
         String role = user.getAdmin() != null ? "ADMIN" : "CLIENT";
-
-        AppToken token = new AppToken();
-        token.setUserId(user.getId());
-        token.setUsername(user.getUsername());
-        token.setRole(role);
-        token.setExpiration(Instant.now().plus(2, ChronoUnit.HOURS));
-
-        return tokenProvider.encrypt(token)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.badRequest().build());
+        return ResponseEntity.ok(role);
     }
 
     @GetMapping("/whoami")

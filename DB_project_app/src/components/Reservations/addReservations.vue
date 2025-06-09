@@ -1,20 +1,12 @@
 <template>
-
   <div class="container mt-5">
-
     <div class="card shadow-lg border-0 rounded-4">
-
       <div class="card-header custom-header">
-        <h4 class="mb-0">
-          <i class="bi bi-file-earmark-plus"></i>Agregar Reserva
-        </h4>
+        <h4 class="mb-0"><i class="bi bi-file-earmark-plus"></i>Agregar Reserva</h4>
       </div>
 
-
       <div class="card-body">
-
         <form @submit.prevent="submitReservation">
-
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="fecha" class="form-label">Fecha</label>
@@ -43,7 +35,13 @@
               <span class="input-group-text">
                 <i class="bi bi-pencil-square"></i>
               </span>
-              <input v-model="descripcion" type="text" id="descripcion" class="form-control" required />
+              <input
+                v-model="descripcion"
+                type="text"
+                id="descripcion"
+                class="form-control"
+                required
+              />
             </div>
           </div>
 
@@ -54,7 +52,13 @@
                 <span class="input-group-text">
                   <i class="bi bi-ticket-detailed"></i>
                 </span>
-                <input v-model.number="idDetalleViaje" type="number" id="detalleViaje" class="form-control" required />
+                <input
+                  v-model.number="idDetalleViaje"
+                  type="number"
+                  id="detalleViaje"
+                  class="form-control"
+                  required
+                />
               </div>
             </div>
 
@@ -64,17 +68,22 @@
                 <span class="input-group-text">
                   <i class="bi bi-person-circle"></i>
                 </span>
-                <input v-model.number="idUsuario" type="number" id="usuario" class="form-control" required />
+                <input
+                  v-model.number="idUsuario"
+                  type="number"
+                  id="usuario"
+                  class="form-control"
+                  required
+                />
               </div>
             </div>
           </div>
 
           <div class="d-flex justify-content-center mt-4">
             <button type="submit" class="btn btn-dark btn-sm">
-                <i class="bi bi-save me-2"></i>Guardar Tour
+              <i class="bi bi-save me-2"></i>Guardar Tour
             </button>
-           </div>
-
+          </div>
         </form>
       </div>
     </div>
@@ -96,7 +105,7 @@ const submitReservation = () => {
     hora: hora.value,
     descripcion: descripcion.value,
     idDetalleViaje: idDetalleViaje.value,
-    idUsuario: idUsuario.value
+    idUsuario: idUsuario.value,
   }
 
   console.log('Reserva enviada:', nuevaReserva)
