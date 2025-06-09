@@ -7,6 +7,33 @@
         <div v-if="loading" class="alert alert-info">Cargando reservas...</div>
         <div v-if="error" class="alert alert-danger">Error al cargar reservas.</div>
 
+        <table>
+
+            <thead class="table-dark">
+                <tr>
+                    <td>ID</td>
+                    <td>Fecha</td>
+                    <td>Hora</td>
+                    <td>Usuario</td>
+                    <td>Sub.Viaje</td>
+                    <td>Sub.Extra</td>
+                    <td>Total</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr v-for="reservation in paginatedReservations" :key="reservation.id">
+                    <td>{{  reservation.id }}</td>
+                    <td>{{ reservation.date }}</td>
+                    <td>{{ reservation.time }}</td>
+                    <td>{{ reservation.user?.username || '-' }}</td>
+                    <td>{{ reservation.tourSubtotal }}</td>
+                    <td>{{ reservation.extraSubtotal }}</td>
+                    <td>{{reservation.total }}</td>
+                </tr>
+            </tbody>
+
+        </table>
 
         <nav v-if="pageCount > 1" aria-label="">
              <ul class="pagination justify-content-center">
@@ -56,7 +83,7 @@ const pageSize = 10
 
 const pageCount = computed(() => Math.ceil((reservations.value?.length || 0) / pageSize))
 
-const paginatedUsers = computed(() => {
+const paginatedReservations = computed(() => {
   const start = (currentPage.value - 1) * pageSize
   return (reservations.value || []).slice(start, start + pageSize)
 })

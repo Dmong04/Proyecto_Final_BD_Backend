@@ -7,9 +7,26 @@
         <div v-if="loading" class="alert alert-info">Cargando tours...</div>
         <div v-if="error" class="alert alert-danger">Error al cargar tours.</div>
 
-        <table>
+        <table v-if="paginatedTours.length" class="table table-striped">
 
+            <th class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                </tr>
+            </th>
 
+            <tbody>
+                <tr v-for="tour in paginatedTours" :key="tour.id">
+                    <td>{{ tour.id }}</td>
+                    <th>{{ tour.type }}</th>
+                    <th>{{tour.description }}</th>
+                    <th>{{ tour.price.toFixed(2) }}</th>
+
+                </tr>
+            </tbody>
         </table>
 
         <nav v-if="pageCount > 1" aria-label="">
@@ -63,7 +80,7 @@ const pageSize = 10
 
 const pageCount = computed(() => Math.ceil((tours.value?.length || 0) / pageSize))
 
-const paginatedUsers = computed(() => {
+const paginatedTours = computed(() => {
   const start = (currentPage.value - 1) * pageSize
   return (tours.value || []).slice(start, start + pageSize)
 })
