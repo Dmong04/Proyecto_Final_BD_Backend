@@ -2,7 +2,7 @@
 
     <div class="container mt-4">
 
-        <h2>Lista de Extras</h2>
+        <h2>Lista de Reservas</h2>
 
         <div v-if="loading" class="alert alert-info">Cargando reservas...</div>
         <div v-if="error" class="alert alert-danger">Error al cargar reservas.</div>

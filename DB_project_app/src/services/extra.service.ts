@@ -13,7 +13,7 @@ export default {
     },
 
     createExtra(extraData: ExtraData) {
-        return api.post('/tours', extraData)
+        return api.post('/extras', extraData)
     },
 
     getExtraById(id: number) {
