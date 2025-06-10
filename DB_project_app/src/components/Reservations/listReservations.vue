@@ -28,38 +28,25 @@
           <td>{{ reservation.user?.username || '-' }}</td>
           <td>{{ reservation.user?.admin?.name || reservation.user?.client?.name || '-' }}</td>
           <td>{{ reservation.detailTour?.tour?.type }}</td>
-          <td>{{ reservation.tourPrice }}</td>
-          <td>{{ reservation.extraPrice }}</td>
-          <td>{{ reservation.total }}</td>
+          <td>{{ '$' + reservation.tourPrice.toFixed(2) }}</td>
+          <td>{{ '$' + reservation.extraPrice.toFixed(2) }}</td>
+          <td>{{ '$' + reservation.total.toFixed(2) }}</td>
         </tr>
       </tbody>
     </table>
 
     <nav v-if="pageCount > 1" aria-label="">
       <ul class="pagination justify-content-center">
-        <li
-          class="page-item"
-          :class="{ disabled: currentPage === 1 }"
-          @click="changePage(currentPage - 1)"
-        >
+        <li class="page-item" :class="{ disabled: currentPage === 1 }" @click="changePage(currentPage - 1)">
           <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
         </li>
 
-        <li
-          v-for="page in pageCount"
-          :key="page"
-          class="page-item"
-          :class="{ active: currentPage === page }"
-          @click="changePage(page)"
-        >
+        <li v-for="page in pageCount" :key="page" class="page-item" :class="{ active: currentPage === page }"
+          @click="changePage(page)">
           <a class="page-link" href="#">{{ page }}</a>
         </li>
 
-        <li
-          class="page-item"
-          :class="{ disabled: currentPage === pageCount }"
-          @click="changePage(currentPage + 1)"
-        >
+        <li class="page-item" :class="{ disabled: currentPage === pageCount }" @click="changePage(currentPage + 1)">
           <a class="page-link" href="#">Siguiente</a>
         </li>
       </ul>

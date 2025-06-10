@@ -16,7 +16,7 @@ public interface ProviderMapper {
     }
 
     public static Provider toEntity(ProviderDTO dto) {
-        if (dto == null || dto.getId() == null) return null;
+        if (dto == null) return null;
         Provider provider = new Provider();
         provider.setId(dto.getId());
         provider.setName(dto.getName());

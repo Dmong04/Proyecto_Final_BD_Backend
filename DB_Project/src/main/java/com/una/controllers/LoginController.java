@@ -1,18 +1,13 @@
 package com.una.controllers;
 
 import com.una.dto.LoginDTO;
-import com.una.dto.UserDTO;
 import com.una.models.User;
 import com.una.repositories.UserRepository;
-import com.una.security.token.AppToken;
-import com.una.security.token.TokenProvider;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @RestController
@@ -20,11 +15,9 @@ import java.util.Optional;
 public class LoginController {
 
     private final UserRepository userRepository;
-    private final TokenProvider tokenProvider;
 
-    public LoginController(UserRepository userRepository, TokenProvider tokenProvider) {
+    public LoginController(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.tokenProvider = tokenProvider;
     }
 
     @PostMapping("/login")

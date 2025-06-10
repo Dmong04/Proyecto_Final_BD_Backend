@@ -20,7 +20,7 @@
           <td>{{ tour.id }}</td>
           <th>{{ tour.type }}</th>
           <th>{{ tour.description }}</th>
-          <th>{{ tour.price.toFixed(2) }}</th>
+          <th>{{ '$' + tour.price.toFixed(2) }}</th>
         </tr>
       </tbody>
     </table>
