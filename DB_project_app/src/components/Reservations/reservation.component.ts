@@ -4,35 +4,35 @@ import type { Reservation } from '@/models/reservation'
 
 export function ReservationComponent() {
 
-    const reservations  = ref<Reservation[]>([])
-    const loading = ref(false)
-    const error = ref(null)
+  const reservations = ref<Reservation[]>([])
+  const loading = ref(false)
+  const error = ref(null)
 
 
-    const loadTours = async () => {
-        loading.value = true
-        error.value = null
+  const loadTours = async () => {
+    loading.value = true
+    error.value = null
 
-        try {
-            const response = await reservationService.getReservations()
-            reservations.value = response.data
-
-        } catch (err: any) {
-            console.error('Error al cargar reservas: ', err)
-            error.value = err
-        } finally {
-            loading.value = false
-        }
+    try {
+      const response = await reservationService.getReservations()
+      reservations.value = response.data
+      console.log("Reservas: ", reservations.value)
+    } catch (err: any) {
+      console.error('Error al cargar reservas: ', err)
+      error.value = err
+    } finally {
+      loading.value = false
     }
+  }
 
-    onMounted(() => {
-        loadTours()
-    })
+  onMounted(() => {
+    loadTours()
+  })
 
-    return {
-        reservations,
-        loading,
-        error,
-        reload: loadTours
-    }
+  return {
+    reservations,
+    loading,
+    error,
+    reload: loadTours
+  }
 }
