@@ -1,6 +1,7 @@
 @import './base.css';
 @import './../components/HomePage/homepage.css';
 @import './../components/Login/login.css';
+@import './../components/Reservations/reservations.css';
 
 /**************************************/
 .custom-navbar {
