@@ -8,7 +8,7 @@
       <div class="card-body">
         <form>
           <div class="details row col-md-7 mb-3">
-            <div class="input-group col-md-1">
+            <div class="input-group border-0 col-md-1">
               <span>Detalles del viaje</span><br />
               <div class="input-group col-md-6 mb-3">
                 <input
