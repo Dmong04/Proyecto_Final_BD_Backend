@@ -79,12 +79,10 @@
 
 
             <form @submit.prevent="submitPassegers">
-              <div class="container mt-4">
+              <div class="input-group col-m-1 mt-5">
                 <span>Pasajeros</span><br />
-                <div class="card mb-4">
-                  <div class="passengers-adding mb-3 mt-4">
-                    <div class="input-group col-md-6 mb-3">
-                      <input 
+                <div class="input-group col-md-6 mb-3">
+                     <input 
                         type="text" 
                         id="name" 
                         class="form-control" 
@@ -121,17 +119,13 @@
                     <button type="submit" class="btn btn-dark btn-sm">
                       <i class="bi bi-save me-2"></i>Guardar pasajero
                     </button>                  
-                  </div>
-                </div>
               </div>
             </form>
 
             
             <form @submit.prevent="submitExtraDetail">
-              <div class="container mt-4">
+              <div class="input-group col-m-1 mt-5">
                 <span>Detalles extra</span><br />
-                <div class="card mb-4">
-                  <div class="extraDetail-adding mb-3 mt-4">
                     <div class="input-group col-md-6 mb-3">
                       <input 
                         type="text" 
@@ -170,14 +164,12 @@
                     <button type="submit" class="btn btn-dark btn-sm">
                       <i class="bi bi-save me-2"></i>Guardar detalles extra
                     </button>                  
-                  </div>
-                </div>
               </div>            
             </form>
 
 
             <form @submit.prevent="submitReservation">
-              <div class="row">
+              <div class="row mt-5">
                 <span>Reservación</span><br />
                 <div class="col-md-6 mb-3">
                   <label for="fecha" class="form-label">Fecha</label>
