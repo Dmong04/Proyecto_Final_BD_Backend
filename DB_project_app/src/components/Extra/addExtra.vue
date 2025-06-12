@@ -46,20 +46,32 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import extraService from '@/services/extra.service'
 
 const nombre = ref('')
 const descripcion = ref('')
 const precioPersona = ref<number | null>(null)
 
-const submitExtra = () => {
+const submitExtra = async () => {
   const nuevoExtra = {
-    nombre: nombre.value,
-    descripcion: descripcion.value,
-    precioPersona: precioPersona.value
+    name: nombre.value,
+    description: descripcion.value,
+    price: precioPersona.value ?? 0
   }
 
-  console.log('Extra enviado:', nuevoExtra)
-  // POST 
+  console.log('Tour enviado:', nuevoExtra)
+
+  try {
+    await extraService.createExtra(nuevoExtra)
+    alert('Tour guardado con éxito')
+    // limpiar campos si quieres
+    nombre.value = ''
+    descripcion.value = ''
+    precioPersona.value = null
+  } catch (error) {
+    console.error('Error guardando tour:', error)
+    alert('Error al guardar el tour')
+  }
 }
 </script>
 

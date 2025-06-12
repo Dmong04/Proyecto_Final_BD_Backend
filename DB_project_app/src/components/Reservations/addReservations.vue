@@ -128,7 +128,7 @@
                 <span>Detalles extra</span><br />
                     <div class="input-group col-md-6 mb-3">
                       <input 
-                        type="text" 
+                        type="number" 
                         id="participants" 
                         class="form-control" 
                         placeholder="Participantes" 
@@ -138,7 +138,7 @@
                     </div>
                     <div class="input-group col-md-6 mb-3">
                       <input 
-                        type="text" 
+                        type="number" 
                         id="price" 
                         class="form-control" 
                         placeholder="Precio" 
@@ -322,6 +322,14 @@ import { UserComponent } from '../Users/user.component'
 import { ReservationComponent } from './reservation.component'
 import { TourDetailComponent } from './reservation.component'
 import { ExtraDetailComponent } from './reservation.component'
+import reservationService from '@/services/reservation.service'
+import type { Reservation } from '@/models/reservation'
+import type { Passenger } from '@/models/passenger'
+import passengerService from '@/services/passenger.service'
+import { TourDetail } from '@/models/tour_detail'
+import tour_detailService from '@/services/tour_detail.service'
+import type { ExtraDetail } from '@/models/extra_detail'
+import extra_detailService from '@/services/extra_detail.service'
 
 const { tours, loading, error } = TourComponent()
 const { extras, loading: extraLoading, error:extraError } = ExtraComponet()
@@ -336,22 +344,33 @@ const destination = ref('')
 const selectedTourId = ref<number | null>(null)
 const selectedProviderId = ref<number | null>(null)
 
-const submitTourDetail = () => {
+const submitTourDetail = async () => {
   const newTourDetail = {
     numPassengers: numPassengers.value,
     origin: origin.value,
     destination: destination.value,
     tour: selectedTourId.value 
-    // y el proveedor
+    // y el proveedor ???
   }
   console.log('Detalle enviado:', newTourDetail)
+  try {
+    await extra_detailService.createExtraDetail(newExtraDetail)
+    alert('Tour guardado con éxito')
+    // limpiar campos si quieres
+    participants.value = ''
+    price.value = ''
+    selectedTourDetailId.value = null
+  } catch (error) {
+    console.error('Error guardando tour:', error)
+    alert('Error al guardar el tour')
+  }   
 }
 
 const name = ref('')
 const age = ref('')
 const selectedTourDetailId = ref<number | null>(null)
 
-const submitPassegers = () => {
+const submitPassegers = async () => {
   const newPasseger = {
     name: name.value,
     age: age.value,
@@ -360,19 +379,42 @@ const submitPassegers = () => {
 
   console.log('Pasajero enviado:', newPasseger)
   //POST
+  try {
+    await passengerService.createPassenger(newPasseger)
+    alert('Tour guardado con éxito')
+    // limpiar campos si quieres
+    name.value = ''
+    age.value = ''
+    selectedTourDetailId.value = null
+  } catch (error) {
+    console.error('Error guardando tour:', error)
+    alert('Error al guardar el tour')
+  }  
 }
 
 const participants = ref('')
 const price = ref('')
 const selectedExtraId = ref<number | null>(null)
 
-const submitExtraDetail = () => {
+const submitExtraDetail = async () => {
   const newExtraDetail = {
     participants: participants.value,
     price: price.value,
     extra: selectedExtraId.value
   }
   console.log('Detalle extra enviado:', newExtraDetail)
+  try {
+    await extra_detailService.createExtraDetail(newExtraDetail)
+    alert('Tour guardado con éxito')
+    // limpiar campos si quieres
+    participants.value = ''
+    price.value = ''
+    selectedTourDetailId.value = null
+  } catch (error) {
+    console.error('Error guardando tour:', error)
+    alert('Error al guardar el tour')
+  }  
+  
 }
 
 const fecha = ref('')
@@ -385,7 +427,7 @@ const selectedExtraDetailId = ref<number | null>(null)
 const selectedTourDetailId2 = ref<number | null>(null)
 const selectedUserId = ref<number | null>(null)
 
-const submitReservation = () => {
+const submitReservation = async () => {
   const newReservation = {
     fecha: fecha.value,
     hora: hora.value,
@@ -398,6 +440,17 @@ const submitReservation = () => {
     user: selectedUserId
   }
   console.log('Detalle extra enviado:', newReservation)
+  try {
+    await extra_detailService.createExtraDetail(newExtraDetail)
+    alert('Tour guardado con éxito')
+    // limpiar campos si quieres
+    participants.value = ''
+    price.value = ''
+    selectedTourDetailId.value = null
+  } catch (error) {
+    console.error('Error guardando tour:', error)
+    alert('Error al guardar el tour')
+  }   
 }
 
 </script>
