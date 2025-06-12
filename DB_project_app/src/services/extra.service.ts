@@ -1,26 +1,26 @@
 import api from '@/api/api'
 
 export interface ExtraData {
-    nombre: string
-    descripcion: string
-    precioPersona: number
+    name: string
+    description: string
+    price: number
 }
 
 export default {
 
     getExtras() {
-        return api.get('/extras')
+        return api.get('/extra')
     },
 
     createExtra(extraData: ExtraData) {
-        return api.post('/extras', extraData)
+        return api.post('/extra', extraData)
     },
 
     getExtraById(id: number) {
-        return api.get(`/extras/${id}`)
+        return api.get(`/extra/${id}`)
     },
 
     updateExtra(id: number, updatedData: Partial<ExtraData>) {
-        return api.put(`/extras/${id}`, updatedData)
+        return api.put(`/extra/${id}`, updatedData)
     },
 }

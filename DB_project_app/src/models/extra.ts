@@ -3,7 +3,7 @@ export class Extra{
         public id:number,
         public name: string,
         public description: string,
-        public pricePerPerson: number
+        public price: number
 
     ){}
 }

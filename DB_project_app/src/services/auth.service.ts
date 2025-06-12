@@ -1,6 +1,6 @@
-import api from "@/api/api";
-import { useRouter } from "vue-router";
-import { ref } from "vue";
+import api from "@/api/api"
+import { useRouter } from "vue-router"
+import { ref } from "vue"
 
 export function useAuth() {
   const username = ref('')
@@ -23,10 +23,16 @@ export function useAuth() {
     }
   }
 
+  const logout = () => {
+    sessionStorage.removeItem('ROLE')
+    router.push('/login')
+  }
+
   return {
     username,
     password,
     error,
     login,
+    logout
   }
 }

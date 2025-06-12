@@ -23,7 +23,7 @@ export function ExtraComponet() {
     }
 
     onMounted(() => {
-        loadExtras
+        loadExtras()
     })
 
     return {
