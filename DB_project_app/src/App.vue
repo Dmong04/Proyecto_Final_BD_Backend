@@ -66,6 +66,11 @@
         <router-link to="/contacto" class="nav-link" active-class="active">
           <i class="bi bi-envelope me-1"></i>Contáctenos
         </router-link>
+
+        <!-- Logout -->
+        <button @click="logout" class="btn btn-outline-danger ms-3">
+          <i class="bi bi-box-arrow-right me-1"></i>Cerrar sesión
+        </button>
       </div>
 
     </div>
@@ -79,3 +84,16 @@
     </p>
   </footer>
 </template>
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { useAuth } from '@/services/auth.service'
+
+const router = useRouter()
+const { logout: logoutService } = useAuth()
+
+const logout = () => {
+  logoutService()
+  router.push('/login')
+}
+</script>
