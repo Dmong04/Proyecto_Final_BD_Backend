@@ -14,6 +14,7 @@
           <th>Usuario</th>
           <th>Nombre Completo</th>
           <th>Tour</th>
+          <th>Extra</th>
           <th>Sub.Viaje</th>
           <th>Sub.Extra</th>
           <th>Total</th>
@@ -28,6 +29,7 @@
           <td>{{ reservation.user?.username || '-' }}</td>
           <td>{{ reservation.user?.admin?.name || reservation.user?.client?.name || '-' }}</td>
           <td>{{ reservation.detailTour?.tour?.type }}</td>
+          <td>{{ reservation.detailExtra?.extra?.name }}</td>
           <td>{{ reservation.tourPrice }}</td>
           <td>{{ reservation.extraPrice }}</td>
           <td>{{ reservation.total }}</td>

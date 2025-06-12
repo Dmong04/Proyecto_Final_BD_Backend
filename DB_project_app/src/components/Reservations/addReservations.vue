@@ -75,30 +75,30 @@
                   <i class="bi bi-save me-2"></i>Guardar detalles
                 </button>
               </div>
-            </form>            
+            </form>
 
 
             <!-- <form @submit.prevent="submitPassegers">
               <div class="input-group col-m-1 mt-5">
                 <span>Pasajeros</span><br />
                 <div class="input-group col-md-6 mb-3">
-                     <input 
-                        type="text" 
-                        id="name" 
-                        class="form-control" 
-                        placeholder="Nombre" 
+                     <input
+                        type="text"
+                        id="name"
+                        class="form-control"
+                        placeholder="Nombre"
                         v-model="name"
-                        required 
+                        required
                       />
                     </div>
                     <div class="input-group col-md-6 mb-3">
-                      <input 
-                        type="text" 
-                        id="age" 
-                        class="form-control" 
-                        placeholder="Edad" 
+                      <input
+                        type="text"
+                        id="age"
+                        class="form-control"
+                        placeholder="Edad"
                         v-model="age"
-                        required 
+                        required
                       />
                     </div>
                     <label for="id-tourDetail">Selecciona el detalle del tour:</label>
@@ -118,32 +118,32 @@
                     </div>
                     <button type="submit" class="btn btn-dark btn-sm">
                       <i class="bi bi-save me-2"></i>Guardar pasajero
-                    </button>                  
+                    </button>
               </div>
             </form> -->
 
-            
+
             <form @submit.prevent="submitExtraDetail">
               <div class="input-group col-m-1 mt-5">
                 <span>Detalles extra</span><br />
                     <div class="input-group col-md-6 mb-3">
-                      <input 
-                        type="number" 
-                        id="participants" 
-                        class="form-control" 
-                        placeholder="Participantes" 
+                      <input
+                        type="number"
+                        id="participants"
+                        class="form-control"
+                        placeholder="Participantes"
                         v-model="participants"
-                        required 
+                        required
                       />
                     </div>
                     <div class="input-group col-md-6 mb-3">
-                      <input 
+                      <input
                         v-model.number="price"
-                        type="number" 
-                        id="price" 
-                        class="form-control" 
-                        placeholder="Precio"                    
-                        required 
+                        type="number"
+                        id="price"
+                        class="form-control"
+                        placeholder="Precio"
+
                       />
                     </div>
                     <label for="id-extra">Selecciona el extra:</label>
@@ -163,8 +163,8 @@
                     </div>
                     <button type="submit" class="btn btn-dark btn-sm">
                       <i class="bi bi-save me-2"></i>Guardar detalles extra
-                    </button>                  
-              </div>            
+                    </button>
+              </div>
             </form>
 
 
@@ -208,7 +208,7 @@
                     <span class="input-group-text">
                       <i class="bi bi-ticket-detailed"></i>
                     </span>
-                    <input type="number" id="precioTour" class="form-control" v-model.number="precioTour" required />
+                    <input type="number" id="precioTour" class="form-control" v-model.number="precioTour" />
                   </div>
                 </div>
 
@@ -218,7 +218,7 @@
                     <span class="input-group-text">
                       <i class="bi bi-person-circle"></i>
                     </span>
-                    <input type="number" id="precioExtra" class="form-control" v-model.number="precioExtra" required />
+                    <input type="number" id="precioExtra" class="form-control" v-model.number="precioExtra" />
                   </div>
                 </div>
               </div>
@@ -230,7 +230,7 @@
                     <span class="input-group-text">
                       <i class="bi bi-ticket-detailed"></i>
                     </span>
-                    <input type="number" id="total" class="form-control" v-model.number="total" required />
+                    <input type="number" id="total" class="form-control" v-model.number="total" />
                   </div>
                 </div>
 
@@ -374,7 +374,7 @@ const submitTourDetail = async () => {
   } catch (error) {
     console.error('Error guardando tour:', error)
     alert('Error al guardar el tour')
-  }   
+  }
 }
 
 // const name = ref('')
@@ -400,7 +400,7 @@ const submitTourDetail = async () => {
 //   } catch (error) {
 //     console.error('Error guardando tour:', error)
 //     alert('Error al guardar el tour')
-//   }  
+//   }
 // }
 
 const participants = ref<number | null>(null)
@@ -426,8 +426,8 @@ const submitExtraDetail = async () => {
   } catch (error) {
     console.error('Error guardando tour:', error)
     alert('Error al guardar el tour')
-  }  
-  
+  }
+
 }
 
 const fecha = ref('')
@@ -475,7 +475,7 @@ const submitReservation = async () => {
   } catch (error) {
     console.error('Error guardando tour:', error)
     alert('Error al guardar el tour')
-  }   
+  }
 }
 
 </script>
