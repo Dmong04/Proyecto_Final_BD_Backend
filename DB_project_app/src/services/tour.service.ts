@@ -1,9 +1,9 @@
 import api from '@/api/api'
 
 export interface TourData {
-    tipo: string
-    descripcion: string
-    precio: number
+    type: string
+    description: string
+    price: number
 }
 
 export default {
