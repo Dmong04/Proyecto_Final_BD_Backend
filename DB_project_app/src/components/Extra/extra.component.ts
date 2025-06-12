@@ -22,6 +22,16 @@ export function ExtraComponet() {
         }
     }
 
+    const deleteExtraById = async (id: number) => {
+        try {
+          await extraService.deleteExtra(id)
+          extras.value = extras.value.filter(extra => extra.id !== id)
+        } catch (err: any) {
+          console.error('Error al eliminar el extra:', err)
+          error.value = err
+        }
+      }
+
     onMounted(() => {
         loadExtras()
     })

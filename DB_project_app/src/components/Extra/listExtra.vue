@@ -14,6 +14,7 @@
                     <th>Nombre</th>
                     <th>Descripcion</th>
                     <th>PxP</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
 
@@ -24,6 +25,11 @@
                     <th>{{ extra.name }}</th>
                     <th>{{ extra.description }}</th>
                     <th>{{ extra.price.toFixed(2) }}</th>
+                    <td>
+                        <button class="btn btn-sm btn-danger" @click="deleteExtra(extra.id)">
+                            Eliminar
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -83,6 +89,13 @@ function changePage(page: number) {
   if (page < 1) page = 1
   if (page > pageCount.value) page = pageCount.value
   currentPage.value = page
+}
+
+async function deleteExtra(extraId: number) {
+  const confirmed = confirm('¿Estás seguro de que deseas eliminar este extra?')
+  if (confirmed) {
+    await deleteExtra(extraId)
+  }
 }
 
 </script>
