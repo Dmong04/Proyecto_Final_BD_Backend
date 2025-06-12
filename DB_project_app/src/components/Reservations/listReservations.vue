@@ -17,6 +17,7 @@
           <th>Sub.Viaje</th>
           <th>Sub.Extra</th>
           <th>Total</th>
+          <th>Acciones</th>
         </tr>
       </thead>
 
@@ -31,6 +32,7 @@
           <td>{{ reservation.tourPrice }}</td>
           <td>{{ reservation.extraPrice }}</td>
           <td>{{ reservation.total }}</td>
+
         </tr>
       </tbody>
     </table>
@@ -88,4 +90,6 @@ function changePage(page: number) {
   if (page > pageCount.value) page = pageCount.value
   currentPage.value = page
 }
+
+
 </script>
