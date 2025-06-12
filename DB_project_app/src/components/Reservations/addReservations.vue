@@ -13,7 +13,7 @@
                 <span>Detalles del viaje</span><br />
                 <div class="input-group col-md-6 mb-3">
                   <input
-                    type="text"
+                    type="number"
                     id="numPassengers"
                     class="form-control"
                     placeholder="Número de Pasajeros"
@@ -56,21 +56,21 @@
                   </select>
                   <div v-if="error" class="text-danger mt-2">Error al cargar tours.</div>
                 </div>
-                <!-- <label for="id-provider">Selecciona un proveedor:</label>
+                <label for="id-provider">Selecciona un proveedor:</label>
                 <div class="input-group col-md-6 mb-3">
                   <select
                     id="id-provider"
                     class="form-select"
                     v-model="selectedProviderId"
-                    :disabled="loading"
+                    :disabled="providerLoading"
                   >
                     <option disabled value="">-- Selecciona un proveedor --</option>
                     <option v-for="provider in providers" :key="provider.id" :value="provider.id">
                       {{ provider.name }}
                     </option>
                   </select>
-                  <div v-if="error" class="text-danger mt-2">Error al cargar proveedores.</div>
-                </div> -->
+                  <div v-if="providerError" class="text-danger mt-2">Error al cargar proveedores.</div>
+                </div>
                 <button type="submit" class="btn btn-dark btn-sm">
                   <i class="bi bi-save me-2"></i>Guardar detalles
                 </button>
@@ -78,7 +78,7 @@
             </form>            
 
 
-            <form @submit.prevent="submitPassegers">
+            <!-- <form @submit.prevent="submitPassegers">
               <div class="input-group col-m-1 mt-5">
                 <span>Pasajeros</span><br />
                 <div class="input-group col-md-6 mb-3">
@@ -120,7 +120,7 @@
                       <i class="bi bi-save me-2"></i>Guardar pasajero
                     </button>                  
               </div>
-            </form>
+            </form> -->
 
             
             <form @submit.prevent="submitExtraDetail">
@@ -138,11 +138,11 @@
                     </div>
                     <div class="input-group col-md-6 mb-3">
                       <input 
+                        v-model.number="price"
                         type="number" 
                         id="price" 
                         class="form-control" 
-                        placeholder="Precio" 
-                        v-model="price"
+                        placeholder="Precio"                    
                         required 
                       />
                     </div>
@@ -208,7 +208,7 @@
                     <span class="input-group-text">
                       <i class="bi bi-ticket-detailed"></i>
                     </span>
-                    <input type="text" id="precioTour" class="form-control" v-model="precioTour" required />
+                    <input type="number" id="precioTour" class="form-control" v-model.number="precioTour" required />
                   </div>
                 </div>
 
@@ -218,7 +218,7 @@
                     <span class="input-group-text">
                       <i class="bi bi-person-circle"></i>
                     </span>
-                    <input type="text" id="precioExtra" class="form-control" v-model="precioExtra" required />
+                    <input type="number" id="precioExtra" class="form-control" v-model.number="precioExtra" required />
                   </div>
                 </div>
               </div>
@@ -230,7 +230,7 @@
                     <span class="input-group-text">
                       <i class="bi bi-ticket-detailed"></i>
                     </span>
-                    <input type="text" id="total" class="form-control" v-model="total" required />
+                    <input type="number" id="total" class="form-control" v-model.number="total" required />
                   </div>
                 </div>
 
@@ -322,6 +322,7 @@ import { UserComponent } from '../Users/user.component'
 import { ReservationComponent } from './reservation.component'
 import { TourDetailComponent } from './reservation.component'
 import { ExtraDetailComponent } from './reservation.component'
+import { ProviderComponent } from './reservation.component'
 import reservationService from '@/services/reservation.service'
 import type { Reservation } from '@/models/reservation'
 import type { Passenger } from '@/models/passenger'
@@ -330,6 +331,8 @@ import { TourDetail } from '@/models/tour_detail'
 import tour_detailService from '@/services/tour_detail.service'
 import type { ExtraDetail } from '@/models/extra_detail'
 import extra_detailService from '@/services/extra_detail.service'
+import type { Provider } from '@/models/provider'
+import providerService from '@/services/provider.service'
 
 const { tours, loading, error } = TourComponent()
 const { extras, loading: extraLoading, error:extraError } = ExtraComponet()
@@ -337,8 +340,9 @@ const { reservations, loading: reservationLoading, error:reservationError } = Re
 const { tour_details, loading: tour_detailLoading, error:tour_detailError } = TourDetailComponent()
 const { extra_details, loading: extra_detailLoading, error:extra_detailError } = ExtraDetailComponent()
 const { users, loading: userLoading, error:userError } = UserComponent()
+const { providers, loading: providerLoading, error:providerError } = ProviderComponent()
 
-const numPassengers = ref('')
+const numPassengers = ref<number | null>(null)
 const origin = ref('')
 const destination = ref('')
 const selectedTourId = ref<number | null>(null)
@@ -346,70 +350,79 @@ const selectedProviderId = ref<number | null>(null)
 
 const submitTourDetail = async () => {
   const newTourDetail = {
-    numPassengers: numPassengers.value,
+    numPassengers: numPassengers.value ?? 0,
     origin: origin.value,
     destination: destination.value,
-    tour: selectedTourId.value 
+    tour: {
+      id: selectedTourId.value ?? 0
+    },
+    provider: {
+      id: selectedProviderId.value ?? 0
+    }
     // y el proveedor ???
   }
   console.log('Detalle enviado:', newTourDetail)
   try {
-    await extra_detailService.createExtraDetail(newExtraDetail)
-    alert('Tour guardado con éxito')
+    await tour_detailService.createTripDetail(newTourDetail)
+    alert('Detalle del Tour guardado con éxito')
     // limpiar campos si quieres
-    participants.value = ''
-    price.value = ''
-    selectedTourDetailId.value = null
+    numPassengers.value = null
+    origin.value = ''
+    destination.value = ''
+    selectedTourId.value = null
+    selectedProviderId.value = null
   } catch (error) {
     console.error('Error guardando tour:', error)
     alert('Error al guardar el tour')
   }   
 }
 
-const name = ref('')
-const age = ref('')
-const selectedTourDetailId = ref<number | null>(null)
+// const name = ref('')
+// const age = ref('')
+// const selectedTourDetailId = ref<number | null>(null)
 
-const submitPassegers = async () => {
-  const newPasseger = {
-    name: name.value,
-    age: age.value,
-    tourDetail: selectedTourDetailId.value
-  }
+// const submitPassegers = async () => {
+//   const newPasseger = {
+//     name: name.value,
+//     age: age.value,
+//     tourDetail: selectedTourDetailId.value
+//   }
 
-  console.log('Pasajero enviado:', newPasseger)
-  //POST
-  try {
-    await passengerService.createPassenger(newPasseger)
-    alert('Tour guardado con éxito')
-    // limpiar campos si quieres
-    name.value = ''
-    age.value = ''
-    selectedTourDetailId.value = null
-  } catch (error) {
-    console.error('Error guardando tour:', error)
-    alert('Error al guardar el tour')
-  }  
-}
+//   console.log('Pasajero enviado:', newPasseger)
+//   //POST
+//   try {
+//     await passengerService.createPassenger(newPasseger)
+//     alert('Tour guardado con éxito')
+//     // limpiar campos si quieres
+//     name.value = ''
+//     age.value = ''
+//     selectedTourDetailId.value = null
+//   } catch (error) {
+//     console.error('Error guardando tour:', error)
+//     alert('Error al guardar el tour')
+//   }  
+// }
 
-const participants = ref('')
-const price = ref('')
+const participants = ref<number | null>(null)
+const price = ref<number | null>(null)
 const selectedExtraId = ref<number | null>(null)
 
 const submitExtraDetail = async () => {
   const newExtraDetail = {
-    participants: participants.value,
-    price: price.value,
-    extra: selectedExtraId.value
+    participants: participants.value ?? 0,
+    price: price.value ?? 0,
+    extra: {
+      id: selectedExtraId.value ?? 0
+    }
   }
   console.log('Detalle extra enviado:', newExtraDetail)
   try {
     await extra_detailService.createExtraDetail(newExtraDetail)
-    alert('Tour guardado con éxito')
+    alert('Detalle extra guardado con éxito')
     // limpiar campos si quieres
-    participants.value = ''
-    price.value = ''
-    selectedTourDetailId.value = null
+    participants.value = null
+    price.value = null
+    selectedExtraId.value = null
   } catch (error) {
     console.error('Error guardando tour:', error)
     alert('Error al guardar el tour')
@@ -420,33 +433,45 @@ const submitExtraDetail = async () => {
 const fecha = ref('')
 const hora = ref('')
 const descripcion = ref('')
-const precioTour = ref('')
-const precioExtra = ref('')
-const total = ref('')
+const precioTour = ref<number | null>(null)
+const precioExtra = ref<number | null>(null)
+const total = ref<number | null>(null)
 const selectedExtraDetailId = ref<number | null>(null)
 const selectedTourDetailId2 = ref<number | null>(null)
 const selectedUserId = ref<number | null>(null)
 
 const submitReservation = async () => {
   const newReservation = {
-    fecha: fecha.value,
-    hora: hora.value,
-    descripcion: descripcion.value,
-    precioTour: precioTour.value,
-    precioExtra: precioExtra.value,
-    total: total.value,
-    detailExtra: selectedExtraDetailId.value,
-    detailTour: selectedTourDetailId2.value,
-    user: selectedUserId
+    date: fecha.value,
+    time: hora.value,
+    description: descripcion.value,
+    tourPrice: precioTour.value ?? 0,
+    extraPrice: precioExtra.value ?? 0,
+    total: total.value ?? 0,
+    detailExtra: {
+      id: selectedExtraDetailId.value
+    },
+    detailTour: {
+      id: selectedTourDetailId2.value ?? 0
+    },
+    user: {
+      id: selectedUserId.value ?? 0
+    }
   }
-  console.log('Detalle extra enviado:', newReservation)
+  console.log('Reserva enviada:', newReservation)
   try {
-    await extra_detailService.createExtraDetail(newExtraDetail)
-    alert('Tour guardado con éxito')
+    await reservationService.createReservation(newReservation)
+    alert('Reserva guardada con éxito')
     // limpiar campos si quieres
-    participants.value = ''
-    price.value = ''
-    selectedTourDetailId.value = null
+    fecha.value = ''
+    hora.value = ''
+    descripcion.value = ''
+    precioTour.value = null
+    precioExtra.value = null
+    total.value = null
+    selectedExtraDetailId.value = null
+    selectedTourDetailId2.value = null
+    selectedUserId.value = null
   } catch (error) {
     console.error('Error guardando tour:', error)
     alert('Error al guardar el tour')

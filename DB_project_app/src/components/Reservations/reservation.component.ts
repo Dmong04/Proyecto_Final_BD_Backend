@@ -7,6 +7,8 @@ import type { TourDetail } from '@/models/tour_detail'
 import tour_detailService from '@/services/tour_detail.service'
 import type { ExtraDetail } from '@/models/extra_detail'
 import extra_detailService from '@/services/extra_detail.service'
+import type { Provider } from '@/models/provider'
+import providerService from '@/services/provider.service'
 
 export function ReservationComponent() {
 
@@ -142,5 +144,39 @@ export function ExtraDetailComponent(){
     loading,
     error,
     reload: loadExtraDetails
+  }    
+}
+
+export function ProviderComponent(){
+  const providers = ref<Provider[]>([])
+  const loading = ref(false)
+  const error = ref(null)
+
+
+  const loadProviders = async () => {
+    loading.value = true
+    error.value = null
+
+    try {
+      const response = await providerService.getProviders()
+      providers.value = response.data
+      console.log("Detalles extra: ", providers.value)
+    } catch (err: any) {
+      console.error('Error al cargar detalles extra: ', err)
+      error.value = err
+    } finally {
+      loading.value = false
+    }
+  }
+
+  onMounted(() => {
+    loadProviders()
+  })
+
+  return {
+    providers,
+    loading,
+    error,
+    reload: loadProviders
   }    
 }
