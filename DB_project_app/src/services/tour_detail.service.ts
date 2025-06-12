@@ -1,11 +1,11 @@
 import api from '@/api/api'
 
 export interface TripDetailData {
-  passengerCount: number
+  numPassengers: number
   origin: string
   destination: string
-  tour: number
-  provider: number
+  tour: { id: number }
+  provider: { id: number }
 }
 
 export default {
