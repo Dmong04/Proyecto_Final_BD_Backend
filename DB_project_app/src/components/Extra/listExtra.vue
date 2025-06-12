@@ -73,7 +73,7 @@
 import { ref, computed} from 'vue'
 import { ExtraComponet } from './extra.component';
 
-const { extras, loading, error } = ExtraComponet()
+const { extras, loading, error , deleteExtraById} = ExtraComponet()
 
 const currentPage =  ref(1)
 const pageSize = 10
@@ -94,7 +94,7 @@ function changePage(page: number) {
 async function deleteExtra(extraId: number) {
   const confirmed = confirm('¿Estás seguro de que deseas eliminar este extra?')
   if (confirmed) {
-    await deleteExtra(extraId)
+    await deleteExtraById(extraId)
   }
 }
 

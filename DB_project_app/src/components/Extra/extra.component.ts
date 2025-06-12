@@ -41,6 +41,7 @@ export function ExtraComponet() {
         loading,
         error,
         reload: loadExtras,
+        deleteExtraById
     }
 
 }
