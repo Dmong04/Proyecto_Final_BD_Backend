@@ -1,9 +1,9 @@
 import api from '@/api/api'
 
 export interface ExtraDetailData {
-  cantPersona: number
-  precioTotal: number
-  idExtra: number
+  peopleCount: number
+  totalPrice: number
+  extra: number
 }
 
 export default {

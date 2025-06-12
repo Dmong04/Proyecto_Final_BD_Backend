@@ -1,9 +1,9 @@
 import api from '@/api/api'
 
 export interface PassengerData {
-  nombre: string
-  edad: number
-  idDetalleViaje: number
+  name: string
+  age: number
+  tourDetail: number
 }
 
 export default {
