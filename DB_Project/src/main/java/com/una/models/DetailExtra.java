@@ -18,7 +18,7 @@ public class DetailExtra {
     private Integer id;
     @Column(name = "cantPersona")
     private int participants;
-    @Column(name = "precioTotal", insertable = false, updatable = false)
+    @Column(name = "precioTotal")
     private Integer price;
     @ManyToOne
     @JoinColumn(name = "idExtra")

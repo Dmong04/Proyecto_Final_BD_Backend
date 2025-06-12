@@ -4,23 +4,22 @@ export interface ProviderData {
   name: string
   description: string
   email: string
-  telefonos?: string[]
 }
 
 export default {
   getProviders() {
-    return api.get('/proveedores')
+    return api.get('/provider')
   },
 
   createProvider(providerData: ProviderData) {
-    return api.post('/proveedores', providerData)
+    return api.post('/provider', providerData)
   },
 
   updateProvider(id: number, updatedData: Partial<ProviderData>) {
-    return api.put(`/proveedores/${id}`, updatedData)
+    return api.put(`/provider/${id}`, updatedData)
   },
 
   getProviderById(id: number) {
-    return api.get(`/proveedores/${id}`)
+    return api.get(`/provider/${id}`)
   },
 }

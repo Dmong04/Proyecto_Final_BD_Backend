@@ -3,7 +3,7 @@ import api from '@/api/api'
 export interface ExtraDetailData {
   participants: number
   price: number
-  extra: number
+  extra: { id: number }
 }
 
 export default {
