@@ -22,4 +22,8 @@ export default {
   updateUser(id: number, userData: { email: string; username: string }) {
     return api.put(`/user/${id}`, userData)
   },
+
+  deleteUser(id: number) {
+    return api.delete(`/user/${id}`)
+  },
 }

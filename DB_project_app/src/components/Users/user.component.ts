@@ -22,6 +22,16 @@ export function UserComponent() {
     }
   }
 
+  const deleteUserById = async (id: number) => {
+    try {
+      await userService.deleteUser(id)
+      users.value = users.value.filter(user => user.id !== id)
+    } catch (err: any) {
+      console.error('Error al eliminar usuario:', err)
+      error.value = err
+    }
+  }
+
   onMounted(() => {
     loadUsers()
   })
@@ -31,5 +41,7 @@ export function UserComponent() {
     loading,
     error,
     reload: loadUsers,
+    deleteUserById,
   }
 }
+

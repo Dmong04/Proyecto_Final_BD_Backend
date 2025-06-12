@@ -1,9 +1,9 @@
 import api from '@/api/api'
 
 export interface ProviderData {
-  nombre: string
-  descripcion: string
-  correo: string
+  name: string
+  description: string
+  email: string
   telefonos?: string[]
 }
 
