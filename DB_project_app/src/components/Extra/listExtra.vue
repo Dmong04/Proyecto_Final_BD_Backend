@@ -23,7 +23,7 @@
                     <td>{{ extra.id }}</td>
                     <th>{{ extra.name }}</th>
                     <th>{{ extra.description }}</th>
-                    <th>{{ extra.pricePerPerson.toFixed(2) }}</th>
+                    <th>{{ extra.price.toFixed(2) }}</th>
                 </tr>
             </tbody>
         </table>

@@ -53,20 +53,32 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import tourService from '@/services/tour.service'
 
 const tipo = ref('')
 const descripcion = ref('')
 const precio = ref<number | null>(null)
 
-const submitTour = () => {
+const submitTour = async () => {
   const nuevoTour = {
-    tipo: tipo.value,
-    descripcion: descripcion.value,
-    precio: precio.value
+    type: tipo.value,
+    description: descripcion.value,
+    price: precio.value ?? 0
   }
 
   console.log('Tour enviado:', nuevoTour)
-  //POST
+
+  try {
+    await tourService.createTour(nuevoTour)
+    alert('Tour guardado con éxito')
+    // limpiar campos si quieres
+    tipo.value = ''
+    descripcion.value = ''
+    precio.value = null
+  } catch (error) {
+    console.error('Error guardando tour:', error)
+    alert('Error al guardar el tour')
+  }
 }
 </script>
 

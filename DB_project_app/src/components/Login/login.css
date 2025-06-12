@@ -1,0 +1,12 @@
+.login {
+  text-align: center;
+  font-size: large;
+  justify-content: center;
+  padding: 10%;
+}
+
+.entries {
+  text-align: center;
+  width: 50%;
+  margin-left: 25%;
+}
