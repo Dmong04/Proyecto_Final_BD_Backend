@@ -1,31 +1,31 @@
 import api from '@/api/api'
 
 export interface ReservationData {
-    date: string
-    time: string
-    description: string
-    tourSubtotal?: number
-    extraSubtotal?: number
-    extraDetail?: number | null
-    tourDetail: number
-    total?: number
-    user: number
+  fecha: string
+  hora: string
+  descripcion: string
+  subtotalViaje?: number
+  subtotalExtra?: number
+  idDetalleExtra?: number | null
+  idDetalleViaje: number
+  total?: number
+  idUsuario: number
 }
 
 export default {
-    getReservations() {
-        return api.get('/reservas')
-    },
+  getReservations() {
+    return api.get('/reservation')
+  },
 
-    createReservation(reservationData: ReservationData) {
-        return api.post('/reservas', reservationData)
-    },
+  createReservation(reservationData: ReservationData) {
+    return api.post('/reservation', reservationData)
+  },
 
-    updateReservation(id: number, updatedData: Partial<ReservationData>) {
-        return api.put(`/reservas/${id}`, updatedData)
-    },
+  updateReservation(id: number, updatedData: Partial<ReservationData>) {
+    return api.put(`/reservation/${id}`, updatedData)
+  },
 
-    getReservtaionById(id: number) {
-        return api.get(`/reservas/${id}`)
-    },
+  getReservtaionById(id: number) {
+    return api.get(`/reservation/${id}`)
+  },
 }

@@ -7,7 +7,6 @@ export function TourComponent() {
     const loading = ref(false)
     const error = ref(null)
 
-
     const loadTours = async () => {
         loading.value = true
         error.value = null

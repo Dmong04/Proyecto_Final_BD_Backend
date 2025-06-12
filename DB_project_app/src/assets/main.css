@@ -1,6 +1,7 @@
 @import './base.css';
 @import './../components/HomePage/homepage.css';
-
+@import './../components/Login/login.css';
+@import './../components/Reservations/reservations.css';
 
 /**************************************/
 .custom-navbar {
@@ -48,7 +49,9 @@
 
 .dropdown-menu-dark .dropdown-item {
   color: #ffffff;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .dropdown-menu-dark .dropdown-item:hover {

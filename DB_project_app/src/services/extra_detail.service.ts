@@ -1,25 +1,25 @@
 import api from '@/api/api'
 
 export interface ExtraDetailData {
-  peopleCount: number
-  totalPrice: number
+  participants: number
+  price: number
   extra: number
 }
 
 export default {
   getExtraDetails() {
-    return api.get('/detalle-extras')
+    return api.get('/extra_details')
   },
 
   createExtraDetail(data: ExtraDetailData) {
-    return api.post('/detalle-extras', data)
+    return api.post('/extra_details', data)
   },
 
   updateExtraDetail(id: number, updatedData: Partial<ExtraDetailData>) {
-    return api.put(`/detalle-extras/${id}`, updatedData)
+    return api.put(`/extra_details/${id}`, updatedData)
   },
 
   getExtraDetailById(id: number) {
-    return api.get(`/detalle-extras/${id}`)
+    return api.get(`/extra_details/${id}`)
   },
 }

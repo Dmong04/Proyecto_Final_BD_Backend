@@ -1,81 +1,75 @@
 <template>
-  <div class="container mt-4">
 
-    <h2>Lista de Extras</h2>
+    <div class="container mt-4">
 
-    <div v-if="loading" class="alert alert-info">Cargando extras...</div>
-    <div v-if="error" class="alert alert-danger">Error al cargar extras.</div>
+        <h2>Lista de Extras</h2>
 
-    <table v-if="paginatedExtras.length" class="table table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Descripcion</th>
-          <th>PxP</th>
-          <th>Acciones</th> <!-- Nueva columna para botones -->
-        </tr>
-      </thead>
+        <div v-if="loading" class="alert alert-info">Cargando extras...</div>
+        <div v-if="error" class="alert alert-danger">Error al cargar extras.</div>
 
-      <tbody>
-        <tr v-for="extra in paginatedExtras" :key="extra.id">
-          <td>{{ extra.id }}</td>
-          <td>{{ extra.name }}</td>
-          <td>{{ extra.description }}</td>
-          <td>{{ extra.pricePerPerson.toFixed(2) }}</td>
-          <td>
-            <button
-              class="btn btn-danger btn-sm"
-              @click="confirmDelete(extra.id)"
-              title="Eliminar extra"
-            >
-              <i class="bi bi-trash"></i> Eliminar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        <table v-if="paginatedExtras.length" class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>PxP</th>
+                </tr>
+            </thead>
 
-    <nav v-if="pageCount > 1" aria-label="">
-      <ul class="pagination justify-content-center">
+            <tbody>
 
-        <li
-          class="page-item"
-          :class="{ disabled: currentPage === 1 }"
-          @click="changePage(currentPage - 1)"
-        >
-          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-        </li>
+                <tr v-for="extra in paginatedExtras" :key="extra.id">
+                    <td>{{ extra.id }}</td>
+                    <th>{{ extra.name }}</th>
+                    <th>{{ extra.description }}</th>
+                    <th>{{ extra.price.toFixed(2) }}</th>
+                </tr>
+            </tbody>
+        </table>
 
-        <li
-          v-for="page in pageCount"
-          :key="page"
-          class="page-item"
-          :class="{ active: currentPage === page }"
-          @click="changePage(page)"
-        >
-          <a class="page-link" href="#">{{ page }}</a>
-        </li>
+        <nav v-if="pageCount > 1" aria-label="">
 
-        <li
-          class="page-item"
-          :class="{ disabled: currentPage === pageCount }"
-          @click="changePage(currentPage + 1)"
-        >
-          <a class="page-link" href="#">Siguiente</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+             <ul class="pagination justify-content-center">
+                
+                <li
+                 class="page-item"
+                 :class="{ disabled: currentPage === 1 }"
+                 @click="changePage(currentPage - 1)"
+                >
+                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                </li>
+                
+                <li
+                 v-for="page in pageCount"
+                 :key="page"
+                 class="page-item"
+                 :class="{ active: currentPage === page }"
+                 @click="changePage(page)"
+                >
+                 <a class="page-link" href="#">{{ page }}</a>
+                </li>
+                
+                <li
+                 class="page-item"
+                 :class="{ disabled: currentPage === pageCount }"
+                 @click="changePage(currentPage + 1)"
+                >
+                 <a class="page-link" href="#">Siguiente</a>
+              </li>
+            </ul>
+     </nav>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { ExtraComponent } from './extra.component'
 
-const { extras, loading, error, deleteExtra } = ExtraComponent()
+import { ref, computed} from 'vue'
+import { ExtraComponet } from './extra.component';
 
-const currentPage = ref(1)
+const { extras, loading, error } = ExtraComponet()
+
+const currentPage =  ref(1)
 const pageSize = 10
 
 const pageCount = computed(() => Math.ceil((extras.value?.length || 0) / pageSize))
@@ -91,9 +85,4 @@ function changePage(page: number) {
   currentPage.value = page
 }
 
-function confirmDelete(id: number) {
-  if (confirm('¿Seguro que quieres eliminar este extra?')) {
-    deleteExtra(id)
-  }
-}
 </script>

@@ -1,0 +1,36 @@
+.custom-header {
+  background-color: #022135;
+  color: #ffce54;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  padding: 1rem 1.5rem;
+}
+
+.card {
+  border-radius: 1rem;
+  border: none;
+  background-color: #d9d9d9;
+}
+
+label {
+  font-weight: 500;
+  color: #333;
+}
+
+.input-group-text {
+  background-color: #e9ecef;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+input.form-control {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+button.btn {
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+
+.details {
+  display: flex;
+}

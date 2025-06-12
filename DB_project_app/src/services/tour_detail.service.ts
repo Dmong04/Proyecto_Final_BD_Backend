@@ -10,18 +10,18 @@ export interface TripDetailData {
 
 export default {
   getTripDetails() {
-    return api.get('/detalle-viajes')
+    return api.get('/tour_details')
   },
 
   createTripDetail(data: TripDetailData) {
-    return api.post('/detalle-viajes', data)
+    return api.post('/tour_details', data)
   },
 
   updateTripDetail(id: number, updatedData: Partial<TripDetailData>) {
-    return api.put(`/detalle-viajes/${id}`, updatedData)
+    return api.put(`/tour_details/${id}`, updatedData)
   },
 
   getTripDetailById(id: number) {
-    return api.get(`/detalle-viajes/${id}`)
+    return api.get(`/tour_details/${id}`)
   },
 }

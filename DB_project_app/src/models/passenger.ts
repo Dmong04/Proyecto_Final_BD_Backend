@@ -6,5 +6,5 @@ export class Passenger {
     public name: string,
     public age: number,
     public tourDetail: TourDetail
-  ) {}
+  ) { }
 }
