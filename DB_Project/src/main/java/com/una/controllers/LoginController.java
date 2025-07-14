@@ -1,8 +1,10 @@
 package com.una.controllers;
 
 import com.una.dto.LoginDTO;
+import com.una.dto.LoginResponseDTO;
 import com.una.models.User;
 import com.una.repositories.UserRepository;
+import com.una.security.token.JwtService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -15,9 +17,11 @@ import java.util.Optional;
 public class LoginController {
 
     private final UserRepository userRepository;
+    private final JwtService jwtService;
 
-    public LoginController(UserRepository userRepository) {
+    public LoginController(UserRepository userRepository, JwtService jwtService) {
         this.userRepository = userRepository;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/login")
@@ -28,7 +32,9 @@ public class LoginController {
         }
         User user = found.get();
         String role = user.getAdmin() != null ? "ADMIN" : "CLIENT";
-        return ResponseEntity.ok(role);
+        String token = jwtService.generateToken(user.getUsername(), role);
+
+        return ResponseEntity.ok(new LoginResponseDTO(token, role));
     }
 
     @GetMapping("/whoami")
