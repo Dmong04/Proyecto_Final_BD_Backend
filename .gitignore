@@ -1,0 +1,22 @@
+# Java
+*.class
+
+# Maven
+target/
+log/
+
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Spring Boot
+*.log
+.spring-boot-devtools.properties
+application.properties
+application.yml
+.env
