@@ -30,11 +30,15 @@ public class AdminController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Ejemplo a seguir en los demás endpoints
     @GetMapping("/name/{name}")
     public ResponseEntity<AdminDTO> getAdminByName(@PathVariable String name) {
-        return service.findAdminByName(name)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            Optional<AdminDTO> found =  service.findAdminByName(name);
+            return found.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping

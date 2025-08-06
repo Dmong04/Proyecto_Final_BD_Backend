@@ -8,20 +8,20 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "proveedor")
+@Table(name = "supplier")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Provider {
+public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "nombre")
+    @Column(name = "name")
     private String name;
-    @Column(name = "descripcion")
+    @Column(name = "description")
     private String description;
-    @Column(name = "correo")
+    @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "provider")
+    @OneToMany(mappedBy = "supplier")
     private List<DetailTour> details;
 }

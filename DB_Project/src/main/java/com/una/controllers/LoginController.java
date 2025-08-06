@@ -6,6 +6,7 @@ import com.una.models.User;
 import com.una.repositories.UserRepository;
 import com.una.security.token.JwtService;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -26,22 +27,35 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO dto) {
-        Optional<User> found = userRepository.findByUsername(dto.getUsername());
-        if (found.isEmpty() || !found.get().getPassword().equals(dto.getPassword())) {
-            return ResponseEntity.badRequest().build();
+        try {
+            Optional<User> found = userRepository.findByUsername(dto.getUsername());
+            if (found.isEmpty() || !found.get().getPassword().equals(dto.getPassword())) {
+                return ResponseEntity.badRequest().build();
+            }
+            User user = found.get();
+            String token = jwtService.generateToken(user.getUsername(), user.getRole());
+            String name;
+            if (user.getAdmin() == null) {
+                name = user.getClient().getName();
+            } else {
+                name = user.getAdmin().getName();
+            }
+            return ResponseEntity.ok(new LoginResponseDTO(user.getUsername(), name, token));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        User user = found.get();
-        String role = user.getAdmin() != null ? "ADMIN" : "CLIENT";
-        String token = jwtService.generateToken(user.getUsername(), role);
-
-        return ResponseEntity.ok(new LoginResponseDTO(token, role));
     }
 
+    // Método para validar al usuario
     @GetMapping("/whoami")
     public ResponseEntity<String> whoami(Authentication authentication) {
-        if (authentication == null) {
-            return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body("No autenticado");
+        try {
+            if (authentication == null) {
+                return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body("No autenticado");
+            }
+            return ResponseEntity.ok("Autenticado como: " + authentication.getName());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.ok("Autenticado como: " + authentication.getName());
     }
 }

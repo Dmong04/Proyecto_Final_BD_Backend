@@ -1,3 +1,6 @@
+Create database coco_tours_db;
+go
+
 -- Use database
 USE coco_tours_db;
 GO
@@ -7,6 +10,7 @@ CREATE TABLE client (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
+GO
 
 -- Table: client_phones
 CREATE TABLE client_phones (
@@ -15,12 +19,14 @@ CREATE TABLE client_phones (
     phone VARCHAR(20) NOT NULL,
     FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE CASCADE
 );
+GO
 
 -- Table: administrator
 CREATE TABLE administrator (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
+GO
 
 -- Table: user
 CREATE TABLE [user] (
@@ -30,10 +36,10 @@ CREATE TABLE [user] (
     password VARCHAR(150) NOT NULL,
     client_id INT DEFAULT NULL,
     admin_id INT DEFAULT NULL,
-    role VARCHAR(15),
     FOREIGN KEY (client_id) REFERENCES client(id) ON DELETE SET NULL,
     FOREIGN KEY (admin_id) REFERENCES administrator(id) ON DELETE SET NULL
-);
+    );
+GO
 
 -- Table: extra
 CREATE TABLE extra (
@@ -42,6 +48,7 @@ CREATE TABLE extra (
     description VARCHAR(100) NOT NULL,
     unit_price DECIMAL(10,2) NOT NULL
 );
+GO
 
 -- Table: extra_detail
 CREATE TABLE extra_detail (
@@ -51,6 +58,7 @@ CREATE TABLE extra_detail (
     extra_id INT NOT NULL,
     FOREIGN KEY (extra_id) REFERENCES extra(id) ON DELETE CASCADE
 );
+GO
 
 -- Table: supplier
 CREATE TABLE supplier (
@@ -59,6 +67,7 @@ CREATE TABLE supplier (
     description VARCHAR(100) NOT NULL,
     email VARCHAR(70) NOT NULL
 );
+GO
 
 -- Table: supplier_phones
 CREATE TABLE supplier_phones (
@@ -67,18 +76,21 @@ CREATE TABLE supplier_phones (
     supplier_id INT NOT NULL,
     FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON DELETE CASCADE
 );
+GO
 
 -- Table: tour
 CREATE TABLE tour (
-    id          INT IDENTITY(1,1) PRIMARY KEY,
-    type        VARCHAR(30)   NOT NULL,
-    description varchar(max)  NOT NULL,
-    price       DECIMAL(10,2) NOT NULL
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    type VARCHAR(30) NOT NULL,
+    description TEXT NOT NULL,
+    price DECIMAL(10,2) NOT NULL
 );
+GO
 
 -- Table: tour_detail
 CREATE TABLE tour_detail (
     id INT IDENTITY(1,1) PRIMARY KEY,
+    passenger_count INT NOT NULL,
     origin VARCHAR(40) NOT NULL,
     destination VARCHAR(40) NOT NULL,
     tour_id INT NOT NULL,
@@ -86,6 +98,7 @@ CREATE TABLE tour_detail (
     FOREIGN KEY (tour_id) REFERENCES tour(id) ON DELETE CASCADE,
     FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON DELETE CASCADE
 );
+GO
 
 -- Table: reservations
 CREATE TABLE reservations (
@@ -103,6 +116,7 @@ CREATE TABLE reservations (
     FOREIGN KEY (tour_detail_id) REFERENCES tour_detail(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES [user](id) ON DELETE CASCADE
 );
+GO
 
 -- Table: passengers
 CREATE TABLE passengers (
@@ -113,4 +127,4 @@ CREATE TABLE passengers (
     FOREIGN KEY (tour_detail_id) REFERENCES tour_detail(id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
-
+GO

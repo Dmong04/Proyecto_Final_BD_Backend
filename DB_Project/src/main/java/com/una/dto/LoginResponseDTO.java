@@ -1,20 +1,19 @@
 package com.una.dto;
 
+import com.una.models.User;
+import lombok.Getter;
+
 public class LoginResponseDTO {
-
+    @Getter
+    private String username;
+    @Getter
+    private String name;
+    @Getter
     private String token;
-    private String role;
 
-    public LoginResponseDTO(String token, String role) {
+    public LoginResponseDTO(String username, String name, String token) {
+        this.username = username;
+        this.name = name;
         this.token = token;
-        this.role = role;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public String getRole() {
-        return role;
     }
 }
