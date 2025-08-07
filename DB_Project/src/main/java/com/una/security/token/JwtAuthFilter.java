@@ -2,6 +2,7 @@ package com.una.security.token;
 
 import com.una.models.User;
 import com.una.repositories.UserRepository;
+import com.una.security.token.routes.APIRoutes;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.PathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -26,6 +28,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private APIRoutes routes;
+    @Autowired
+    private PathMatcher pathMatcher;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -37,6 +44,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
+        String role = null;
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
@@ -47,6 +55,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         token = authHeader.substring(7);
         try {
             username = jwtService.extractUsername(token);
+            role = jwtService.extractRole(token);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
@@ -65,6 +74,22 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
+        if (!isRouteAllowedForRole(request.getRequestURI(), role)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{\"error\": \"Acceso denegado para el rol: " + role + "\"}");
+            return;
+        }
         filterChain.doFilter(request, response);
     }
+
+    private boolean isRouteAllowedForRole(String requestURI, String role) {
+        List<String> allowedRoutes = "ADMIN".equals(role) ? routes.getAdminRoutes()
+                : "CLIENT".equals(role) ? routes.getClientRoutes()
+                : List.of();
+
+        return allowedRoutes.stream()
+                .anyMatch(pattern -> pathMatcher.match(pattern, requestURI));
+    };
 }

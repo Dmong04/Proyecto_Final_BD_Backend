@@ -28,7 +28,7 @@ public class User {
     @OneToOne
     @JoinColumn(name = "admin_id", nullable = true)
     private Admin admin;
-    @Column(name = "role")
+    @Column(name = "role", insertable = false)
     private String role;
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;

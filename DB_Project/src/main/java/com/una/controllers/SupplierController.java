@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("coco_tours/api/v2/provider")
+@RequestMapping("coco_tours/api/v2/supplier")
 public class SupplierController {
 
     private final SupplierService service;
@@ -18,7 +18,7 @@ public class SupplierController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<SupplierDTO> getAllProviders() {
         return service.getAllProviders();
     }

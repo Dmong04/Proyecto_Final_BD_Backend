@@ -20,7 +20,7 @@ public class AdminController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<AdminDTO>> getAllAdmins() {
         try
             {
