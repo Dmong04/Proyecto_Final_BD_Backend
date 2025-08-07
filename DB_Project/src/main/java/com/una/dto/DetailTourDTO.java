@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DetailTourDTO {
     private Integer id;
-    private Integer numPassengers;
     private String origin;
     private String destination;
     private TourDTO tour;
-    private ProviderDTO provider;
+    private SupplierDTO provider;
 }

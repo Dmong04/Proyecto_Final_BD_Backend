@@ -17,25 +17,25 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "fecha")
+    @Column(name = "date")
     private LocalDate date;
-    @Column(name = "hora")
+    @Column(name = "time")
     private LocalTime time;
-    @Column(name = "descripcion")
+    @Column(name = "description")
     private String description;
-    @Column(name = "subtotalViaje", insertable = false, updatable = false)
+    @Column(name = "tour_subtotal", insertable = false, updatable = false)
     private Integer tourPrice;
-    @Column(name = "subtotalExtra", insertable = false, updatable = false)
+    @Column(name = "extra_subtotal", insertable = false, updatable = false)
     private Integer extraPrice;
     @Column(name = "total", insertable = false, updatable = false)
     private Integer total;
     @ManyToOne
-    @JoinColumn(name = "idDetalleExtra")
+    @JoinColumn(name = "extra_detail_id")
     private DetailExtra detailExtra;
     @ManyToOne
-    @JoinColumn(name = "idDetalleViaje")
+    @JoinColumn(name = "tour_detail_id")
     private DetailTour detailTour;
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "user_id")
     private User user;
 }
