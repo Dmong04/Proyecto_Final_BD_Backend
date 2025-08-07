@@ -18,7 +18,7 @@ public class ClientController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<ClientDTO> getAllClients() {
         return service.getAllClients();
     }

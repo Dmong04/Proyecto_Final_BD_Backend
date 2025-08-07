@@ -17,7 +17,7 @@ public class DetailTourController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<DetailTourDTO> getAllDetails() {
         return service.getAllDetails();
     }
