@@ -11,7 +11,8 @@ public class UserDTO {
     private Integer id;
     private String email;
     private String username;
-    private String password;
+    private String role;
+    // private String password;
     private ClientDTO client;
     private AdminDTO admin;
 }

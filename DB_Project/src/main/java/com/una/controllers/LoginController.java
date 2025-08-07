@@ -30,7 +30,7 @@ public class LoginController {
         try {
             Optional<User> found = userRepository.findByUsername(dto.getUsername());
             if (found.isEmpty() || !found.get().getPassword().equals(dto.getPassword())) {
-                return ResponseEntity.badRequest().build();
+                return ResponseEntity.badRequest().body("Usuario o contraseña incorrectos");
             }
             User user = found.get();
             String token = jwtService.generateToken(user.getUsername(), user.getRole());
@@ -40,9 +40,9 @@ public class LoginController {
             } else {
                 name = user.getAdmin().getName();
             }
-            return ResponseEntity.ok(new LoginResponseDTO(user.getUsername(), name, token));
+            return ResponseEntity.ok(new LoginResponseDTO(name, user.getUsername(), user.getRole(), token));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
