@@ -12,7 +12,6 @@
           <th>Tipo</th>
           <th>Descripcion</th>
           <th>Precio</th>
-          <th>Acciones</th>
         </tr>
       </thead>
 
@@ -21,12 +20,7 @@
           <td>{{ tour.id }}</td>
           <th>{{ tour.type }}</th>
           <th>{{ tour.description }}</th>
-          <th>{{ tour.price.toFixed(2) }}</th>
-          <td>
-            <button class="btn btn-sm btn-danger" @click="de(tour.id)">
-              Eliminar
-            </button>
-          </td>
+          <th>{{ '$' + tour.price.toFixed(2) }}</th>
         </tr>
       </tbody>
     </table>
@@ -67,7 +61,7 @@
 import { ref, computed } from 'vue'
 import { TourComponent } from './tour.component'
 
-const { tours, loading, error , deleteTourById} = TourComponent()
+const { tours, loading, error } = TourComponent()
 
 const currentPage = ref(1)
 const pageSize = 10
@@ -83,12 +77,5 @@ function changePage(page: number) {
   if (page < 1) page = 1
   if (page > pageCount.value) page = pageCount.value
   currentPage.value = page
-}
-
-async function deleteTour(tourId: number) {
-  const confirmed = confirm('¿Estás seguro de que deseas eliminar este viaje ?')
-  if (confirmed) {
-    await deleteTourById(tourId)
-  }
 }
 </script>

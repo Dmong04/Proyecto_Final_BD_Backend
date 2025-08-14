@@ -1,7 +1,7 @@
 package com.una.controllers;
 
-import com.una.dto.ProviderDTO;
-import com.una.services.ProviderService;
+import com.una.dto.SupplierDTO;
+import com.una.services.SupplierService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,37 +9,37 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("coco_tours/api/v2/provider")
-public class ProviderController {
+@RequestMapping("coco_tours/api/v2/supplier")
+public class SupplierController {
 
-    private final ProviderService service;
+    private final SupplierService service;
 
-    public ProviderController(ProviderService service) {
+    public SupplierController(SupplierService service) {
         this.service = service;
     }
 
-    @GetMapping
-    public List<ProviderDTO> getAllProviders() {
+    @GetMapping("/all")
+    public List<SupplierDTO> getAllProviders() {
         return service.getAllProviders();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProviderDTO> getProviderById(@PathVariable Integer id) {
+    public ResponseEntity<SupplierDTO> getProviderById(@PathVariable Integer id) {
         return service.findProviderById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<ProviderDTO> getProviderByName(@PathVariable String name) {
+    public ResponseEntity<SupplierDTO> getProviderByName(@PathVariable String name) {
         return service.findProviderByName(name)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ProviderDTO createProvider(@RequestBody ProviderDTO dto) {
-        Optional<ProviderDTO> found = service.findProviderByName(dto.getName());
+    public SupplierDTO createProvider(@RequestBody SupplierDTO dto) {
+        Optional<SupplierDTO> found = service.findProviderByName(dto.getName());
         if (found.isPresent()) {
             ResponseEntity.badRequest().build();
             return null;
@@ -49,7 +49,7 @@ public class ProviderController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProviderDTO> updateProvider(@PathVariable Integer id, @RequestBody ProviderDTO dto) {
+    public ResponseEntity<SupplierDTO> updateProvider(@PathVariable Integer id, @RequestBody SupplierDTO dto) {
         return service.findProviderById(id)
                 .map(provider -> {
                     provider.setName(dto.getName());
@@ -61,8 +61,8 @@ public class ProviderController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ProviderDTO> deleteProviderById(@PathVariable Integer id) {
-        Optional<ProviderDTO> found = service.findProviderById(id);
+    public ResponseEntity<SupplierDTO> deleteProviderById(@PathVariable Integer id) {
+        Optional<SupplierDTO> found = service.findProviderById(id);
         if (found.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

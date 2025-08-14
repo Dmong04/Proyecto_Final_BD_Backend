@@ -18,7 +18,7 @@ public class DetailExtraController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<DetailExtraDTO> getAllExtraDetails() {
         return service.getAllExtraDetails();
     }

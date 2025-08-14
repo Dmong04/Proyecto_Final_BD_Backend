@@ -16,11 +16,11 @@ public class Extra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "nombre")
+    @Column(name = "name")
     private String name;
-    @Column(name = "descripcion")
+    @Column(name = "description")
     private String description;
-    @Column(name = "precioPersona")
+    @Column(name = "unit_price")
     private Integer price;
     @OneToMany(mappedBy = "extra")
     private List<DetailExtra> detailsExtra;

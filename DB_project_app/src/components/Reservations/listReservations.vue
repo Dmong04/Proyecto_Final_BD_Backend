@@ -18,7 +18,6 @@
           <th>Sub.Viaje</th>
           <th>Sub.Extra</th>
           <th>Total</th>
-          <th>Acciones</th>
         </tr>
       </thead>
 
@@ -31,39 +30,25 @@
           <td>{{ reservation.user?.admin?.name || reservation.user?.client?.name || '-' }}</td>
           <td>{{ reservation.detailTour?.tour?.type }}</td>
           <td>{{ reservation.detailExtra?.extra?.name }}</td>
-          <td>{{ reservation.tourPrice }}</td>
-          <td>{{ reservation.extraPrice }}</td>
-          <td>{{ reservation.total }}</td>
-
+          <td>{{ '$' + reservation.tourPrice }}</td>
+          <td>{{ '$' + reservation.extraPrice }}</td>
+          <td>{{ '$' + reservation.total }}</td>
         </tr>
       </tbody>
     </table>
 
     <nav v-if="pageCount > 1" aria-label="">
       <ul class="pagination justify-content-center">
-        <li
-          class="page-item"
-          :class="{ disabled: currentPage === 1 }"
-          @click="changePage(currentPage - 1)"
-        >
+        <li class="page-item" :class="{ disabled: currentPage === 1 }" @click="changePage(currentPage - 1)">
           <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
         </li>
 
-        <li
-          v-for="page in pageCount"
-          :key="page"
-          class="page-item"
-          :class="{ active: currentPage === page }"
-          @click="changePage(page)"
-        >
+        <li v-for="page in pageCount" :key="page" class="page-item" :class="{ active: currentPage === page }"
+          @click="changePage(page)">
           <a class="page-link" href="#">{{ page }}</a>
         </li>
 
-        <li
-          class="page-item"
-          :class="{ disabled: currentPage === pageCount }"
-          @click="changePage(currentPage + 1)"
-        >
+        <li class="page-item" :class="{ disabled: currentPage === pageCount }" @click="changePage(currentPage + 1)">
           <a class="page-link" href="#">Siguiente</a>
         </li>
       </ul>
@@ -92,6 +77,4 @@ function changePage(page: number) {
   if (page > pageCount.value) page = pageCount.value
   currentPage.value = page
 }
-
-
 </script>

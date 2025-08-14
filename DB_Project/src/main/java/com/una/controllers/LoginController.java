@@ -1,18 +1,16 @@
 package com.una.controllers;
 
 import com.una.dto.LoginDTO;
-import com.una.dto.UserDTO;
+import com.una.dto.LoginResponseDTO;
 import com.una.models.User;
 import com.una.repositories.UserRepository;
-import com.una.security.token.AppToken;
-import com.una.security.token.TokenProvider;
+import com.una.security.token.JwtService;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @RestController
@@ -20,29 +18,44 @@ import java.util.Optional;
 public class LoginController {
 
     private final UserRepository userRepository;
-    private final TokenProvider tokenProvider;
+    private final JwtService jwtService;
 
-    public LoginController(UserRepository userRepository, TokenProvider tokenProvider) {
+    public LoginController(UserRepository userRepository, JwtService jwtService) {
         this.userRepository = userRepository;
-        this.tokenProvider = tokenProvider;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO dto) {
-        Optional<User> found = userRepository.findByUsername(dto.getUsername());
-        if (found.isEmpty() || !found.get().getPassword().equals(dto.getPassword())) {
-            return ResponseEntity.badRequest().build();
+        try {
+            Optional<User> found = userRepository.findByUsername(dto.getUsername());
+            if (found.isEmpty() || !found.get().getPassword().equals(dto.getPassword())) {
+                return ResponseEntity.badRequest().body("Usuario o contraseña incorrectos");
+            }
+            User user = found.get();
+            String token = jwtService.generateToken(user.getUsername(), user.getRole());
+            String name;
+            if (user.getAdmin() == null) {
+                name = user.getClient().getName();
+            } else {
+                name = user.getAdmin().getName();
+            }
+            return ResponseEntity.ok(new LoginResponseDTO(name, user.getUsername(), user.getRole(), token));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-        User user = found.get();
-        String role = user.getAdmin() != null ? "ADMIN" : "CLIENT";
-        return ResponseEntity.ok(role);
     }
 
+    // Método para validar al usuario
     @GetMapping("/whoami")
     public ResponseEntity<String> whoami(Authentication authentication) {
-        if (authentication == null) {
-            return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body("No autenticado");
+        try {
+            if (authentication == null) {
+                return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body("No autenticado");
+            }
+            return ResponseEntity.ok("Autenticado como: " + authentication.getName());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.ok("Autenticado como: " + authentication.getName());
     }
 }
