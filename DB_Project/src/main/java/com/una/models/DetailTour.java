@@ -16,18 +16,16 @@ public class DetailTour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "numPasajeros")
-    private Integer numPassengers;
-    @Column(name = "origen")
+    @Column(name = "origin")
     private String origin;
-    @Column(name = "destino")
+    @Column(name = "destination")
     private String destination;
     @ManyToOne
-    @JoinColumn(name = "idViaje")
+    @JoinColumn(name = "tour_id")
     private Tour tour;
     @ManyToOne
-    @JoinColumn(name = "idProveedor")
-    private Provider provider;
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
     @OneToMany(mappedBy = "details", cascade = CascadeType.ALL)
     private List<Passenger> passengers;
     @OneToMany(mappedBy = "detailTour")

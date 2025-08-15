@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "administrador")
+@Table(name = "administrator")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -14,6 +14,6 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "nombre")
+    @Column(name = "name")
     private String name;
 }

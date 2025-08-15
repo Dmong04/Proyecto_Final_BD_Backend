@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "pasajeros")
+@Table(name = "passengers")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -14,11 +14,11 @@ public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "nombre")
+    @Column(name = "name")
     private String name;
-    @Column(name = "edad")
+    @Column(name = "age")
     private Integer age;
     @ManyToOne
-    @JoinColumn(name = "idDetalleViaje")
+    @JoinColumn(name = "tour_detail_id")
     private DetailTour details;
 }

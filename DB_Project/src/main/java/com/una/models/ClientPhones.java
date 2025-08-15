@@ -6,17 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "telefonos_cliente")
+@Table(name = "client_phones")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PhoneClients {
+public class ClientPhones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
-    @JoinColumn(name = "cliente")
+    @JoinColumn(name = "client_id")
     private Client client;
-    @Column(name = "telefono")
+    @Column(name = "phone")
     private String phone;
 }

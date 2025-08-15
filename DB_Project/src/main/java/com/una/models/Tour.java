@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "viaje")
+@Table(name = "tour")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -16,11 +16,11 @@ public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "tipo")
+    @Column(name = "type")
     private String type;
-    @Column(name = "descripcion")
+    @Column(name = "description")
     private String description;
-    @Column(name = "precio")
+    @Column(name = "price")
     private Integer price;
     @OneToMany(mappedBy = "tour")
     private List<DetailTour> details;

@@ -17,7 +17,7 @@ public class DetailTourController {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<DetailTourDTO> getAllDetails() {
         return service.getAllDetails();
     }
@@ -42,7 +42,6 @@ public class DetailTourController {
     public ResponseEntity<DetailTourDTO> updateDetail(@PathVariable Integer id, @RequestBody DetailTourDTO dto) {
         return service.findDetailById(id)
                 .map(detail -> {
-                    detail.setNumPassengers(dto.getNumPassengers());
                     detail.setOrigin(dto.getOrigin());
                     detail.setDestination(dto.getDestination());
                     detail.setTour(dto.getTour());

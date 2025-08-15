@@ -1,12 +1,15 @@
-DROP TABLE coco_tours_db_v3.usuario;
-DROP TABLE coco_tours_db_v3.administrador;
-DROP TABLE coco_tours_db_v3.cliente;
-DROP TABLE coco_tours_db_v3.detalle_extra;
-DROP TABLE coco_tours_db_v3.extra;
-DROP TABLE coco_tours_db_v3.detalle_viaje;
-DROP TABLE coco_tours_db_v3.pasajeros;
-DROP TABLE coco_tours_db_v3.telefonos_proveedor;
-DROP TABLE coco_tours_db_v3.reservas;
-DROP TABLE coco_tours_db_v3.telefonos_cliente;
-DROP TABLE coco_tours_db_v3.viaje;
-DROP TABLE coco_tours_db_v3.proveedor;
+USE coco_tours_db;
+
+-- Eliminar primero las tablas dependientes (hijas)
+DROP TABLE IF EXISTS passengers;
+DROP TABLE IF EXISTS reservations;
+DROP TABLE IF EXISTS client_phones;
+DROP TABLE IF EXISTS supplier_phones;
+DROP TABLE IF EXISTS extra_detail;
+DROP TABLE IF EXISTS tour_detail;
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS administrator;
+DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS extra;
+DROP TABLE IF EXISTS tour;
+DROP TABLE IF EXISTS supplier;
