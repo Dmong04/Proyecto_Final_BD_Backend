@@ -41,6 +41,18 @@
           <AssociatedConnUserName />
           <FullPath>coco_tours_script.sql</FullPath>
         </FileNode>
+        <FileNode Name="Procedimiento_coco_tours_admin.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-1J8JCLT\LOCALHOST:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-1J8JCLT\LOCALHOST</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Procedimiento_coco_tours_admin.sql</FullPath>
+        </FileNode>
+        <FileNode Name="Procedimiento_coco_tours_cliente.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-1J8JCLT\LOCALHOST:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-1J8JCLT\LOCALHOST</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>Procedimiento_coco_tours_cliente.sql</FullPath>
+        </FileNode>
         <FileNode Name="queries de prueba.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>localhost</AssociatedConnSrvName>

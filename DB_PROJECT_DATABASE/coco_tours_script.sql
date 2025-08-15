@@ -50,12 +50,28 @@ CREATE TABLE extra (
 );
 GO
 
+-- Table: reservations
+CREATE TABLE reservations (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    description VARCHAR(100) NOT NULL,
+    tour_subtotal DECIMAL(10,2) DEFAULT 0,
+    extra_subtotal DECIMAL(10,2) DEFAULT 0,
+    total DECIMAL(10,2) DEFAULT 0,
+    [user_id] INT NOT NULL,
+    FOREIGN KEY ([user_id]) REFERENCES [user](id) ON DELETE CASCADE
+);
+GO
+
 -- Table: extra_detail
 CREATE TABLE extra_detail (
     id INT IDENTITY(1,1) PRIMARY KEY,
     person_count INT NOT NULL,
     total_price DECIMAL(10,2),
     extra_id INT NOT NULL,
+    reservation_id INT NOT NULL,
+    FOREIGN KEY (reservation_id) REFERENCES reservations(id) ON DELETE CASCADE,
     FOREIGN KEY (extra_id) REFERENCES extra(id) ON DELETE CASCADE
 );
 GO
@@ -82,7 +98,7 @@ GO
 CREATE TABLE tour (
     id INT IDENTITY(1,1) PRIMARY KEY,
     type VARCHAR(30) NOT NULL,
-    description TEXT NOT NULL,
+    description VARCHAR(MAX) NOT NULL,
     price DECIMAL(10,2) NOT NULL
 );
 GO
@@ -94,27 +110,11 @@ CREATE TABLE tour_detail (
     origin VARCHAR(40) NOT NULL,
     destination VARCHAR(40) NOT NULL,
     tour_id INT NOT NULL,
+    reservation_id INT NOT NULL,
     supplier_id INT NOT NULL,
     FOREIGN KEY (tour_id) REFERENCES tour(id) ON DELETE CASCADE,
+    FOREIGN KEY (reservation_id) REFERENCES reservations(id) ON DELETE CASCADE,
     FOREIGN KEY (supplier_id) REFERENCES supplier(id) ON DELETE CASCADE
-);
-GO
-
--- Table: reservations
-CREATE TABLE reservations (
-    id INT IDENTITY(1,1) PRIMARY KEY,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
-    description VARCHAR(100) NOT NULL,
-    tour_subtotal DECIMAL(10,2) DEFAULT 0,
-    extra_subtotal DECIMAL(10,2) DEFAULT 0,
-    total DECIMAL(10,2) DEFAULT 0,
-    extra_detail_id INT DEFAULT NULL,
-    tour_detail_id INT NOT NULL,
-    user_id INT NOT NULL,
-    FOREIGN KEY (extra_detail_id) REFERENCES extra_detail(id) ON DELETE SET NULL,
-    FOREIGN KEY (tour_detail_id) REFERENCES tour_detail(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES [user](id) ON DELETE CASCADE
 );
 GO
 
