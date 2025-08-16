@@ -13,7 +13,7 @@ BEGIN TRY
  --Name validation
 IF @name IS NULL or @name = ' '
 BEGIN
- RAISERROR('El nombre no corresponde a un valor válido', 16, 1)
+ RAISERROR('El nombre no puede ser un valor vacio', 16, 1)
  RETURN
 END
 
@@ -34,12 +34,12 @@ END
 --Username validation
 IF @username IS NULL or @username = ' '
 BEGIN
- RAISERROR('El nombre de usuario no corresponde a un valor válido', 16, 1)
+ RAISERROR('El nombre de usuario  no puede ser un valor vacio', 16, 1)
  RETURN;
 END
 ELSE IF exists (SELECT 1 FROM [user] WHERE username = @username)
 BEGIN
- RAISERROR('El nombre de usuario ya se enc^uentra en uso', 16, 1)
+ RAISERROR('El nombre de usuario ya se encuentra en uso', 16, 1)
  RETURN
 END
 
