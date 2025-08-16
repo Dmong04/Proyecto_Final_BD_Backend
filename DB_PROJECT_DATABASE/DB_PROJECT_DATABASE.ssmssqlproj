@@ -53,11 +53,11 @@
           <AssociatedConnUserName />
           <FullPath>pa_client_insert.sql</FullPath>
         </FileNode>
-        <FileNode Name="queries de prueba.sql">
+        <FileNode Name="Tets_Query.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>localhost</AssociatedConnSrvName>
           <AssociatedConnUserName />
-          <FullPath>queries de prueba.sql</FullPath>
+          <FullPath>Tets_Query.sql</FullPath>
         </FileNode>
         <FileNode Name="user_trigger.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>

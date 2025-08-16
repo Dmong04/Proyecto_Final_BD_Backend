@@ -23,24 +23,24 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "pa_client_insert.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (57))",
+              "Title": "pa_client_insert.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (74))",
               "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_client_insert.sql",
               "RelativeDocumentMoniker": "pa_client_insert.sql",
-              "ToolTip": "pa_client_insert.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (57))",
+              "ToolTip": "pa_client_insert.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (74))",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
               "WhenOpened": "2025-08-16T02:17:06.643Z",
-              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (57))"
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (74))"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "pa_admin_insert.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (78))",
+              "Title": "pa_admin_insert.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (77))",
               "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_insert.sql",
               "RelativeDocumentMoniker": "pa_admin_insert.sql",
-              "ToolTip": "pa_admin_insert.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (78))",
+              "ToolTip": "pa_admin_insert.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (77))",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
               "WhenOpened": "2025-08-16T01:38:01.882Z",
-              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (78))"
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (77))"
             }
           ]
         }
