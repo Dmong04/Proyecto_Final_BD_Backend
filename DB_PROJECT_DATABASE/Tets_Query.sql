@@ -1,14 +1,10 @@
 USE coco_tours_db;
 GO
 
-EXEC pa_admin_insert 
-	@name = 'Soporte',
-	@email = 'Soporte@gmail.com',
-	@username = 'soporte01',
-	@password = 'Soporte#1234';
 
-	-- Ver administradores creados
-SELECT * FROM administrator;
+SELECT * FROM client;
 
--- Ver usuarios asociados a administradores
-SELECT * FROM [user] WHERE admin_id IS NOT NULL;
+SELECT * FROM client_phones;
+
+SELECT * FROM [user] WHERE client_id IS NOT NULL;
+
