@@ -19,7 +19,7 @@ BEGIN TRY
         RETURN
     END
 
-    -- Validaciones
+    --
     IF @new_name IS NOT NULL AND @new_name = ' '
     BEGIN
         RAISERROR('El nombre no puede ser un valor vacio', 16, 1)
@@ -68,7 +68,7 @@ BEGIN TRY
         END
     END
 
-    -- Actualizar
+    --
     UPDATE administrator
     SET name = ISNULL(@new_name, name)
     WHERE id = @admin_id;

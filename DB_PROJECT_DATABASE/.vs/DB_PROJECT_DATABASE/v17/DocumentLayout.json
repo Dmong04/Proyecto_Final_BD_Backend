@@ -1,12 +1,170 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_passanger_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_passanger_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_passenger_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_passenger_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_extra_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_extra_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_extra_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_extra_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_client_update.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_client_update.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_client_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_client_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_client_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_client_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_update.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_admin_update.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_admin_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_admin_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "pa_passanger_delete.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (70))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_passanger_delete.sql",
+              "RelativeDocumentMoniker": "pa_passanger_delete.sql",
+              "ToolTip": "pa_passanger_delete.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (70))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T05:15:48.027Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (70))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "pa_passenger_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (68))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_passenger_add.sql",
+              "RelativeDocumentMoniker": "pa_passenger_add.sql",
+              "ToolTip": "pa_passenger_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (68))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:57:15.458Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (68))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "pa_extra_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (79))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_extra_add.sql",
+              "RelativeDocumentMoniker": "pa_extra_add.sql",
+              "ToolTip": "pa_extra_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (79))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:33:20.589Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (79))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "pa_extra_delete.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (57))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_extra_delete.sql",
+              "RelativeDocumentMoniker": "pa_extra_delete.sql",
+              "ToolTip": "pa_extra_delete.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (57))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:42:37.387Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (57))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "pa_client_update.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (67))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_client_update.sql",
+              "RelativeDocumentMoniker": "pa_client_update.sql",
+              "ToolTip": "pa_client_update.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (67))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:56:26.124Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (67))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "pa_client_delete.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (66))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_client_delete.sql",
+              "RelativeDocumentMoniker": "pa_client_delete.sql",
+              "ToolTip": "pa_client_delete.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (66))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:56:20.393Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (66))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "pa_client_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (65))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_client_add.sql",
+              "RelativeDocumentMoniker": "pa_client_add.sql",
+              "ToolTip": "pa_client_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (65))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:56:18.976Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (65))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "pa_admin_update.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (64))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_update.sql",
+              "RelativeDocumentMoniker": "pa_admin_update.sql",
+              "ToolTip": "pa_admin_update.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (64))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:55:48.505Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (64))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "pa_admin_delete.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (62))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_delete.sql",
+              "RelativeDocumentMoniker": "pa_admin_delete.sql",
+              "ToolTip": "pa_admin_delete.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (62))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:55:44.914Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (62))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "pa_admin_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (61))",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_add.sql",
+              "RelativeDocumentMoniker": "pa_admin_add.sql",
+              "ToolTip": "pa_admin_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (61))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-16T04:55:40.706Z",
+              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (61))"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

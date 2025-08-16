@@ -19,15 +19,13 @@ BEGIN TRY
         RETURN
     END
 
-    --Name
+    --
 
     IF @new_name IS NOT NULL AND @new_name = ' '
     BEGIN
         RAISERROR('El nombre no puede ser un valor vacio', 16, 1)
         RETURN
     END
-
-    --Phone
 
     IF @new_phone IS NOT NULL
     BEGIN
@@ -43,7 +41,6 @@ BEGIN TRY
         END
     END
 
-    --Email
 
     IF @new_email IS NOT NULL
     BEGIN
@@ -59,7 +56,6 @@ BEGIN TRY
         END
     END
 
-    --Username
 
     IF @new_username IS NOT NULL
     BEGIN
@@ -75,7 +71,6 @@ BEGIN TRY
         END
     END
 
-    --Password
 
     IF @new_password IS NOT NULL
     BEGIN
@@ -93,7 +88,6 @@ BEGIN TRY
 
     --
 
-    
     UPDATE client SET name = ISNULL(@new_name, name) WHERE id = @client_id;
 
     --
