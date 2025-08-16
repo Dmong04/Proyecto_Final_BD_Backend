@@ -1,15 +1,14 @@
-use coco_tours_db;
-go
+USE coco_tours_db;
+GO
 
-insert into administrator(name) values(
-	'Dereck Monge'
-)
+EXEC pa_admin_insert 
+	@name = 'Soporte',
+	@email = 'Soporte@gmail.com',
+	@username = 'soporte01',
+	@password = 'Soporte#1234';
 
-insert into [user](email, username, [password], client_id, admin_id, role) 
-values ('alex@gmail.com', 'alex', '87654321', 1, NULL, 'CLIENT')
+	-- Ver administradores creados
+SELECT * FROM administrator;
 
-select * from [user]
-
-select * from client
-
-delete from [user] where id = 2
+-- Ver usuarios asociados a administradores
+SELECT * FROM [user] WHERE admin_id IS NOT NULL;
