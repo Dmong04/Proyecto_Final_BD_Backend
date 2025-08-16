@@ -1,7 +1,10 @@
 package com.una.controllers;
 
+import com.una.dto.TourDTO;
 import com.una.dto.UserDTO;
+import com.una.exceptions.ServerErrorException;
 import com.una.services.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,47 +22,68 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public List<UserDTO> getAllUsers() {
-        return service.getAllUsers();
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        try {
+            return ResponseEntity.ok(service.getAllUsers());
+        } catch (Exception e) {
+            throw new ServerErrorException(e.getMessage());
+        }
+
     }
 
     @GetMapping("/{username}")
     public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
-        return service.findUserByUsername(username)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            Optional<UserDTO> found = service.findUserByUsername(username);
+            return found.map(userDTO -> new ResponseEntity<>(userDTO, HttpStatus.OK)).orElseGet(() ->
+                    new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        } catch (Exception e) {
+            throw new ServerErrorException(e.getMessage());
+        }
     }
 
     @PostMapping
-    public UserDTO createUser(@RequestBody UserDTO dto) {
-        Optional<UserDTO> found = service.findUserByUsername(dto.getUsername());
-        if (found.isPresent()) {
-            ResponseEntity.badRequest().build();
-            return null;
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO dto) {
+        try {
+            Optional<UserDTO> found = service.findUserByUsername(dto.getUsername());
+            if (found.isPresent()) {
+                ResponseEntity.badRequest().build();
+                return null;
+            }
+            return ResponseEntity.ok(service.createUser(dto));
+        } catch (Exception e) {
+            throw new ServerErrorException(e.getMessage());
         }
-        return service.createUser(dto);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Integer id, @RequestBody UserDTO dto) {
-        return service.findUserById(id)
-                .map(user -> {
-                    user.setEmail(dto.getEmail());
-                    user.setUsername(dto.getUsername());
-                    user.setClient(dto.getClient());
-                    user.setAdmin(dto.getAdmin());
-                    return ResponseEntity.ok(service.createUser(user));
-                })
-                .orElse(ResponseEntity.notFound().build());
+        try {
+            return service.findUserById(id)
+                    .map(user -> {
+                        user.setEmail(dto.getEmail());
+                        user.setUsername(dto.getUsername());
+                        user.setClient(dto.getClient());
+                        user.setAdmin(dto.getAdmin());
+                        return ResponseEntity.ok(service.createUser(user));
+                    })
+                    .orElse(ResponseEntity.notFound().build());
+        } catch (Exception e) {
+            throw new ServerErrorException(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<UserDTO> deleteUserById(@PathVariable Integer id) {
-        Optional<UserDTO> found = service.findUserById(id);
-        if (found.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        try {
+            Optional<UserDTO> found = service.findUserById(id);
+            if (found.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            service.deleteUser(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            throw new ServerErrorException(e.getMessage());
         }
-        service.deleteUser(id);
-        return ResponseEntity.ok().build();
     }
 }

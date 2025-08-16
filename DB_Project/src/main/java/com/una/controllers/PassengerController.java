@@ -1,9 +1,12 @@
 package com.una.controllers;
 
+import com.una.dto.ExtraDTO;
 import com.una.dto.PassengerDTO;
 import com.una.dto.TourDTO;
+import com.una.exceptions.ServerErrorException;
 import com.una.services.PassengerService;
 import com.una.services.TourService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,46 +23,70 @@ public class PassengerController {
 //    }
 //
 //    @GetMapping("/all")
-//    public List<PassengerDTO> getAllPassengers() {
-//        return service.getAllPassengers();
+//    public ResponseEntity<List<PassengerDTO>> getAllPassengers() {
+//        try {
+//            return ResponseEntity.ok(service.getAllPassengers());
+//        } catch (Exception e) {
+//            throw new ServerErrorException(e.getMessage());
+//        }
+//
 //    }
 //
 //    @GetMapping("/{id}")
 //    public ResponseEntity<PassengerDTO> getPassengerById(@PathVariable Integer id) {
-//        return service.getPassengerById(id)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
+//        try {
+//            Optional<PassengerDTO> found = service.findPassengerById(id);
+//            return found.map(passengerDTO -> new ResponseEntity<>(passengerDTO, HttpStatus.OK)).orElseGet(() ->
+//                    new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//        } catch (Exception e) {
+//            throw new ServerErrorException(e.getMessage());
+//        }
 //    }
 //
 //    @PostMapping
-//    public PassengerDTO createPassenger(@RequestBody PassengerDTO dto) {
-//        Optional<PassengerDTO> found = service.get(dto.getType());
-//        if (found.isPresent()) {
-//            ResponseEntity.badRequest().build();
-//            return null;
+//    public ResponseEntity<PassengerDTO> createPassenger(@RequestBody PassengerDTO dto) {
+//        try {
+//            Optional<PassengerDTO> found = service.getPassengerById(dto.getId());
+//            if (found.isPresent()) {
+//                ResponseEntity.badRequest().build();
+//                return null;
+//            }
+//            return ResponseEntity.ok(service.createPassenger(dto)).getBody();
+//        } catch (Exception e) {
+//            throw new ServerErrorException(e.getMessage());
 //        }
-//        return ResponseEntity.ok(service.createTour(dto)).getBody();
+//
 //    }
 //
 //    @PutMapping("/{id}")
-//    public ResponseEntity<TourDTO> updateTour(@PathVariable Integer id, @RequestBody TourDTO dto) {
-//        return service.getTourById(id)
-//                .map(tour -> {
-//                    tour.setType(dto.getType());
-//                    tour.setDescription(dto.getDescription());
-//                    tour.setPrice(dto.getPrice());
-//                    return ResponseEntity.ok(service.createTour(tour));
-//                })
-//                .orElse(ResponseEntity.notFound().build());
+//    public ResponseEntity<PassengerDTO> updatePassenger(@PathVariable Integer id, @RequestBody PassengerDTO dto) {
+//        try {
+//            return service.getPassengerById(id)
+//                    .map(passenger -> {
+//                        passenger.setName(dto.getName());
+//                        passenger.setAge(dto.getAge());
+//                        passenger.setDetailTour(dto.getDetailTour());
+//                        return ResponseEntity.ok(service.createPassenger(passenger));
+//                    })
+//                    .orElse(ResponseEntity.notFound().build());
+//        } catch (Exception e) {
+//            throw new ServerErrorException(e.getMessage());
+//        }
+//
 //    }
 //
 //    @DeleteMapping("/{id}")
-//    public ResponseEntity<TourDTO> deleteTourById(@PathVariable Integer id) {
-//        Optional<TourDTO> found = service.getTourById(id);
-//        if (found.isEmpty()) {
-//            return ResponseEntity.notFound().build();
+//    public ResponseEntity<PassengerDTO> deletePassengerById(@PathVariable Integer id) {
+//        try {
+//            Optional<PassengerDTO> found = service.getPassengerById(id);
+//            if (found.isEmpty()) {
+//                return ResponseEntity.notFound().build();
+//            }
+//            service.deletePassengerById(id);
+//            return ResponseEntity.ok().build();
+//        } catch (Exception e) {
+//            throw new ServerErrorException(e.getMessage());
 //        }
-//        service.deleteTourById(id);
-//        return ResponseEntity.ok().build();
+//
 //    }
 }
