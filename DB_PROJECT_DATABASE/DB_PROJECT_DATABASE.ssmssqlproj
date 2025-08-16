@@ -47,11 +47,11 @@
           <AssociatedConnUserName />
           <FullPath>pa_admin_insert.sql</FullPath>
         </FileNode>
-        <FileNode Name="Procedimiento_coco_tours_cliente.sql">
+        <FileNode Name="pa_client_insert.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>localhost</AssociatedConnSrvName>
           <AssociatedConnUserName />
-          <FullPath>Procedimiento_coco_tours_cliente.sql</FullPath>
+          <FullPath>pa_client_insert.sql</FullPath>
         </FileNode>
         <FileNode Name="queries de prueba.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:localhost:True</AssociatedConnectionMoniker>
