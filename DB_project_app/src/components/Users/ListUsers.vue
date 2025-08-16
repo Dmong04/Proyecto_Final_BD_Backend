@@ -86,7 +86,6 @@ function changePage(page: number) {
   currentPage.value = page
 }
 
-
 async function deleteUser(userId: number) {
   const confirmed = confirm('¿Estás seguro de que deseas eliminar este usuario?')
   if (confirmed) {

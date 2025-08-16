@@ -23,4 +23,8 @@ export default {
     updateTour(id: number, updatedData: Partial<TourData>) {
         return api.put(`/tours/${id}`, updatedData)
     },
+
+    deleteTour(id: number) {
+        return api.delete(`/tours/${id}`)
+    },
 }

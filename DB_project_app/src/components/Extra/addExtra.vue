@@ -64,7 +64,6 @@ const submitExtra = async () => {
   try {
     await extraService.createExtra(nuevoExtra)
     alert('Tour guardado con éxito')
-    // limpiar campos si quieres
     nombre.value = ''
     descripcion.value = ''
     precioPersona.value = null

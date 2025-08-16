@@ -23,6 +23,16 @@ export function TourComponent() {
         }
     }
 
+    const deleteTourById = async (id: number) => {
+        try {
+            await tourService.deleteTour(id)
+            tours.value = tours.value.filter(tour => tour.id !== id)
+        } catch (err: any) {
+            console.error('Error al eliminar el viaje:', err)
+            error.value = err
+        }
+    }
+
     onMounted(() => {
         loadTours()
     })
@@ -31,6 +41,7 @@ export function TourComponent() {
         tours,
         loading,
         error,
-        reload: loadTours
+        reload: loadTours,
+        deleteTourById,
     }
 }
