@@ -11,13 +11,11 @@ BEGIN
 BEGIN TRY
 
  --Name validation
-IF @name IS NULL or @name = ' '
+IF @name IS NULL OR LTRIM(RTRIM(@name)) = ''
 BEGIN
  RAISERROR('El nombre no puede ser un valor vacio', 16, 1)
  RETURN
 END
-
-INSERT INTO administrator ([name]) values (@name)
 
 --Email validation
 IF @email NOT LIKE '%_@_%._%'
@@ -32,7 +30,7 @@ BEGIN
 END
 
 --Username validation
-IF @username IS NULL or @username = ' '
+IF @username IS NULL OR LTRIM(RTRIM(@username)) = ''
 BEGIN
  RAISERROR('El nombre de usuario  no puede ser un valor vacio', 16, 1)
  RETURN;
@@ -44,20 +42,24 @@ BEGIN
 END
 
 --Password valitadion
-IF @password IS NULL or @username = ''
+IF @password IS NULL OR LTRIM(RTRIM(@password)) = ''
 BEGIN
 RAISERROR('la contraseña no es valida', 16, 1)
  RETURN
 END
-ELSE IF (@password NOT LIKE '%[0-9]%' OR @password NOT LIKE '%[!@#$^&*()]%')
+ELSE IF (@password NOT LIKE '%[0-9]%' AND @password NOT LIKE '%[!@#$^&*()]%')
 BEGIN
  RAISERROR('La contraseña debe incluir un numero y un caracters especial', 16, 1)
  RETURN
 END
 
 --
-INSERT INTO [user] (email, username, [password], client_id, admin_id)
-VALUES (@email, @username, @password, null, @@IDENTITY)
+INSERT INTO administrator ([name]) VALUES (@name)
+
+DECLARE @admin_id INT = SCOPE_IDENTITY()
+
+INSERT INTO [user](email, username, [password], admin_id, client_id)
+VALUES(@email,@username,@password,@admin_id,NULL)
 
 END  TRY
 BEGIN CATCH

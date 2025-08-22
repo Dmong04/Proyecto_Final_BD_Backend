@@ -13,17 +13,14 @@ BEGIN TRY
 
  --Name validation
 
-IF @name IS NULL or @name = ' '
+IF @name IS NULL OR LTRIM(RTRIM(@name)) = ''
 BEGIN
  RAISERROR('El nombre no corresponde a un valor válido', 16, 1)
  RETURN
 END
 
-INSERT INTO client([name]) values (@name)
-
 --Phone validation
-
-IF @phone IS NULL OR @phone = ''
+IF @phone IS NULL OR LTRIM(RTRIM(@phone)) = ''
 BEGIN
  RAISERROR('El telefono no puede estar vacio', 16, 1)
  RETURN
@@ -54,41 +51,37 @@ END
 
 --Username validation
 
-IF @username IS NULL or @username = ' '
+IF @username IS NULL OR LTRIM(RTRIM(@username)) = ''
 BEGIN
  RAISERROR('El nombre de usuario no corresponde a un valor válido', 16, 1)
  RETURN;
 END
 ELSE IF exists (SELECT 1 FROM [user] WHERE username = @username)
 BEGIN
- RAISERROR('El nombre de usuario ya se enc^uentra en uso', 16, 1)
+ RAISERROR('El nombre de usuario ya se encuentra en uso', 16, 1)
  RETURN
 END
 
 --Password Validation
 	
-IF @password IS NULL or @username = ''
+IF @password IS NULL OR LTRIM(RTRIM(@password)) = ''
 BEGIN
 RAISERROR('la contraseña no es valida', 16, 1)
  RETURN
 END
-ELSE IF (@password NOT LIKE '%[0-9]%' OR @password NOT LIKE '%[!@#$^&*()]%')
+ELSE IF (@password NOT LIKE '%[0-9]%' AND @password NOT LIKE '%[!@#$^&*()]%')
 BEGIN
- RAISERROR('La contraseña debe incluir un numero y un caracters especial', 16, 1)
+ RAISERROR('La contraseña debe incluir un numero y un caracter especial', 16, 1)
  RETURN
 END
 
 --
-DECLARE @client_phone_id INT;
 
-DECLARE @client_id INT; 
-
-SELECT @client_id = @@IDENTITY; 
-
-SELECT @client_phone_id = @client_id;
+INSERT INTO client([name]) VALUES (@name)
+DECLARE @client_id INT = SCOPE_IDENTITY()
 	
 INSERT INTO client_phones(client_id, [phone])
-values (@client_phone_id, @phone)
+values (@client_id, @phone)
 
 INSERT INTO [user] (email, username, [password], client_id, admin_id)
 values (@email, @username, @password, @client_id, null)

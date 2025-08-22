@@ -11,13 +11,17 @@ BEGIN TRY
  IF NOT EXISTS(SELECT 1 FROM client WHERE id = @client_id)
  BEGIN
   RAISERROR('El cliente no existe', 16, 1)
+  RETURN
  END
  --
- DELETE FROM client_phones WHERE client_id = @client_id;
+ BEGIN TRANSACTION
+  DELETE FROM client_phones WHERE client_id = @client_id;
 
- DELETE FROM [user] WHERE client_id = @client_id;
+  DELETE FROM [user] WHERE client_id = @client_id;
 
- DELETE FROM client WHERE id = @client_id;
+  DELETE FROM client WHERE id = @client_id;
+
+ COMMIT TRANSACTION
 
 END TRY
 BEGIN CATCH

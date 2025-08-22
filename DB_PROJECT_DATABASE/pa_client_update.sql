@@ -21,7 +21,7 @@ BEGIN TRY
 
     --
 
-    IF @new_name IS NOT NULL AND @new_name = ' '
+    IF LTRIM(RTRIM(@new_name)) = ''
     BEGIN
         RAISERROR('El nombre no puede ser un valor vacio', 16, 1)
         RETURN
@@ -59,7 +59,7 @@ BEGIN TRY
 
     IF @new_username IS NOT NULL
     BEGIN
-        IF @new_username = ' '
+        IF LTRIM(RTRIM(@new_username)) = ''
         BEGIN
             RAISERROR('El nombre de usuario  no puede ser un valor vacio', 16, 1)
             RETURN
@@ -74,7 +74,7 @@ BEGIN TRY
 
     IF @new_password IS NOT NULL
     BEGIN
-        IF @new_password = ' '
+        IF LTRIM(RTRIM(@new_password)) = ''
         BEGIN
             RAISERROR('La contraseña  no puede ser un valor vacio', 16, 1)
             RETURN

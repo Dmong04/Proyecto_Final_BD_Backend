@@ -3,10 +3,10 @@ GO
 
 CREATE PROCEDURE pa_admin_update (
     @admin_id INT,
-    @new_name VARCHAR(50) = NULL,
-    @new_email VARCHAR(70) = NULL,
-    @new_username VARCHAR(30) = NULL,
-    @new_password VARCHAR(150) = NULL
+    @new_name VARCHAR(50),
+    @new_email VARCHAR(70),
+    @new_username VARCHAR(30),
+    @new_password VARCHAR(150)
 ) AS
 BEGIN
 BEGIN TRY
@@ -20,7 +20,7 @@ BEGIN TRY
     END
 
     --
-    IF @new_name IS NOT NULL AND @new_name = ' '
+    IF LTRIM(RTRIM(@new_name)) = ''
     BEGIN
         RAISERROR('El nombre no puede ser un valor vacio', 16, 1)
         RETURN
@@ -42,7 +42,7 @@ BEGIN TRY
 
     IF @new_username IS NOT NULL
     BEGIN
-        IF @new_username = ' '
+       IF LTRIM(RTRIM(@new_username)) = ''
         BEGIN
             RAISERROR('El nombre de usuario  no puede ser un valor vacio', 16, 1)
             RETURN
@@ -56,12 +56,12 @@ BEGIN TRY
 
     IF @new_password IS NOT NULL
     BEGIN
-        IF @new_password = ' '
+        IF LTRIM(RTRIM(@new_password)) = ''
         BEGIN
             RAISERROR('La contraseña  no puede ser un valor vacio', 16, 1)
             RETURN
         END
-        ELSE IF (@new_password NOT LIKE '%[0-9]%' OR @new_password NOT LIKE '%[!@#$^&*()]%')
+        ELSE IF (@new_password NOT LIKE '%[0-9]%' AND @new_password NOT LIKE '%[!@#$^&*()]%')
         BEGIN
             RAISERROR('La contraseña debe incluir un número y un carácter especial', 16, 1)
             RETURN

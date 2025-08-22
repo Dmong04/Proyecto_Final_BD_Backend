@@ -9,13 +9,13 @@ CREATE PROCEDURE pa_extra_insert(
 BEGIN
 BEGIN TRY
 
- IF @name IS NULL OR @name = ''
+ IF @name IS NULL OR LTRIM(RTRIM(@name)) = ''
  BEGIN
   RAISERROR ('El nombre no puede ser un valor vacio',16, 1)
   RETURN
  END
 
-IF @description IS NULL OR @description = ''
+IF @description IS NULL OR LTRIM(RTRIM(@description)) = ''
  BEGIN
   RAISERROR ('La descripcion no puede ser un valor vacio',16, 1)
   RETURN
