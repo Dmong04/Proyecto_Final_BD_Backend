@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_update.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_admin_update.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
       "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_admin_add.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{EC231600-ACE5-CC1A-8FC2-1145FCF32354}|DB_PROJECT_DATABASE.ssmssqlproj|solutionrelative:pa_admin_delete.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,13 +27,35 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "pa_admin_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (62))",
+              "Title": "pa_admin_update.sql - no conectado",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_update.sql",
+              "RelativeDocumentMoniker": "pa_admin_update.sql",
+              "ToolTip": "pa_admin_update.sql - no conectado",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-22T15:05:41.058Z",
+              "EditorCaption": " - no conectado"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "pa_admin_delete.sql - no conectado",
+              "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_delete.sql",
+              "RelativeDocumentMoniker": "pa_admin_delete.sql",
+              "ToolTip": "pa_admin_delete.sql - no conectado",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-22T15:03:57.185Z",
+              "EditorCaption": " - no conectado"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "pa_admin_add.sql - no conectado",
               "DocumentMoniker": "C:\\Users\\Universidad Nacional\\Documents\\II Ciclo\\Admin Base de datos\\Trabajo\\Trabajo Final\\Proyecto-Final-BD\\DB_PROJECT_DATABASE\\pa_admin_add.sql",
               "RelativeDocumentMoniker": "pa_admin_add.sql",
-              "ToolTip": "pa_admin_add.sql - localhost.coco_tours_db (Nahomy\\Universidad Nacional (62))",
+              "ToolTip": "pa_admin_add.sql - no conectado",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-08-22T05:11:18.966Z",
-              "EditorCaption": " - localhost.coco_tours_db (Nahomy\\Universidad Nacional (62))"
+              "WhenOpened": "2025-08-22T15:03:21.447Z",
+              "EditorCaption": " - no conectado"
             }
           ]
         }

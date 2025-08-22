@@ -10,14 +10,13 @@ CREATE PROCEDURE pa_admin_insert (
 BEGIN
 BEGIN TRY
 
- --Name validation
-IF @name IS NULL OR LTRIM(RTRIM(@name)) = ''
-BEGIN
- RAISERROR('El nombre no puede ser un valor vacio', 16, 1)
- RETURN
-END
 
---Email validation
+ IF @name IS NULL OR LTRIM(RTRIM(@name)) = ''
+ BEGIN
+  RAISERROR('El nombre no puede ser un valor vacio', 16, 1)
+  RETURN
+ END
+
 IF @email NOT LIKE '%_@_%._%'
 BEGIN
  RAISERROR('El formato email no es válido', 16, 1)
@@ -29,7 +28,6 @@ BEGIN
  RETURN
 END
 
---Username validation
 IF @username IS NULL OR LTRIM(RTRIM(@username)) = ''
 BEGIN
  RAISERROR('El nombre de usuario  no puede ser un valor vacio', 16, 1)
@@ -41,7 +39,6 @@ BEGIN
  RETURN
 END
 
---Password valitadion
 IF @password IS NULL OR LTRIM(RTRIM(@password)) = ''
 BEGIN
 RAISERROR('la contraseña no es valida', 16, 1)

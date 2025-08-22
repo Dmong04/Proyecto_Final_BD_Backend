@@ -7,7 +7,7 @@ CREATE PROCEDURE pa_admin_delete(
 BEGIN
 BEGIN TRY
  
- --validation
+
  IF NOT EXISTS(SELECT 1 FROM administrator WHERE id = @admin_id)
  BEGIN
   RAISERROR('El administrador no existe', 16, 1)
@@ -15,13 +15,11 @@ BEGIN TRY
  END
  --
  BEGIN TRANSACTION
-
- DELETE FROM [user] WHERE admin_id = @admin_id;
- DELETE FROM administrator WHERE id = @admin_id;
-
+  DELETE FROM [user] WHERE admin_id = @admin_id;
+  DELETE FROM administrator WHERE id = @admin_id;
  COMMIT TRANSACTION
-
  --
+
 END TRY
 BEGIN CATCH
  RAISERROR('Ha ocurrido un error al eliminar al administrador', 16, 1)
