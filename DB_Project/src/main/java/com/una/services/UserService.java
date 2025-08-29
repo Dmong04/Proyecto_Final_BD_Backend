@@ -1,6 +1,6 @@
 package com.una.services;
 
-import com.una.dto.UserDTO;
+import com.una.dto.usersResponse.UserDTO;
 import com.una.mappers.UserMapper;
 import com.una.models.User;
 import com.una.repositories.UserRepository;
@@ -14,7 +14,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService (UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -34,6 +34,10 @@ public class UserService {
         User user = UserMapper.toEntity(dto);
         user = userRepository.save(user);
         return UserMapper.toDTO(user);
+    }
+
+    public void saveAdminUser(String name, String email, String username, String password) {
+        userRepository.pa_admin_insert(name, email, username, password);
     }
 
     public void deleteUser(Integer id) {

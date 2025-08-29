@@ -1,5 +1,6 @@
 package com.una.dto;
 
+import com.una.dto.usersResponse.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

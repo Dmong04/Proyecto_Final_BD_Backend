@@ -1,6 +1,7 @@
 package com.una.controllers;
 
-import com.una.dto.UserDTO;
+import com.una.dto.usersResponse.AdminUser;
+import com.una.dto.usersResponse.UserDTO;
 import com.una.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,25 @@ public class UserController {
             return null;
         }
         return service.createUser(dto);
+    }
+
+    @PostMapping("/admin")
+    public ResponseEntity<AdminUser> createAdminUser(@RequestBody UserDTO dto) {
+        Optional<UserDTO> found = service.findUserByUsername(dto.getUsername());
+        if (found.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+        service.saveAdminUser(dto.getName(), dto.getEmail(), dto.getUsername(), dto.getPassword());
+        Optional<UserDTO> created = service.findUserByUsername(dto.getUsername());
+        AdminUser response = new AdminUser();
+        if (created.isPresent()) {
+            response.setId(created.get().getId());
+            response.setEmail(created.get().getEmail());
+            response.setUsername(created.get().getUsername());
+            response.setRole(created.get().getRole());
+            response.setAdmin(created.get().getAdmin());
+        }
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")

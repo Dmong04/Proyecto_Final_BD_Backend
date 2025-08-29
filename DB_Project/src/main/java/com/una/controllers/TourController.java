@@ -5,6 +5,7 @@ import com.una.services.TourService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,19 +38,18 @@ public class TourController {
             ResponseEntity.badRequest().build();
             return null;
         }
-        return ResponseEntity.ok(service.createTour(dto)).getBody();
+        service.insertTour(dto);
+        return ResponseEntity.ok(dto).getBody();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<TourDTO> updateTour(@PathVariable Integer id, @RequestBody TourDTO dto) {
-        return service.getTourById(id)
-                .map(tour -> {
-                    tour.setType(dto.getType());
-                    tour.setDescription(dto.getDescription());
-                    tour.setPrice(dto.getPrice());
-                    return ResponseEntity.ok(service.createTour(tour));
-                })
-                .orElse(ResponseEntity.notFound().build());
+        Optional<TourDTO> found = service.getTourById(id);
+        if (found.isPresent()) {
+            service.updateTour(dto);
+            return ResponseEntity.ok(dto);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
