@@ -1,7 +1,6 @@
 package com.una.controllers;
 
 import com.una.dto.AdminDTO;
-import com.una.exceptions.ServerErrorException;
 import com.una.services.AdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ public class AdminController {
             {
                 return ResponseEntity.ok(service.getAllAdmins());
             } catch (Exception e) {
-            throw new ServerErrorException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -37,7 +36,7 @@ public class AdminController {
             return found.map(adminDTO -> new ResponseEntity<>(adminDTO, HttpStatus.OK)).orElseGet(() ->
                     new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception e) {
-            throw new ServerErrorException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -47,7 +46,7 @@ public class AdminController {
             Optional<AdminDTO> found =  service.findAdminByName(name);
             return found.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception e) {
-            throw new ServerErrorException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -62,7 +61,7 @@ public class AdminController {
             ResponseEntity.ok();
             return ResponseEntity.ok(service.createAdmin(dto));
         } catch (Exception e) {
-            throw new ServerErrorException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -76,7 +75,7 @@ public class AdminController {
                     })
                     .orElse(ResponseEntity.notFound().build());
         } catch (Exception e) {
-            throw new ServerErrorException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -90,7 +89,7 @@ public class AdminController {
             service.deleteAdminById(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            throw new ServerErrorException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

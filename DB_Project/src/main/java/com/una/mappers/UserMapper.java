@@ -1,6 +1,6 @@
 package com.una.mappers;
 
-import com.una.dto.usersResponse.UserDTO;
+import com.una.dto.UserDTO;
 import com.una.models.User;
 
 public interface UserMapper {

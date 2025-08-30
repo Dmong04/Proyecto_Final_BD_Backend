@@ -1,6 +1,5 @@
-package com.una.dto.usersResponse;
+package com.una.dto;
 
-import com.una.dto.AdminDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminUser {
+public class UserDTO {
     private Integer id;
-    // private String name;
     private String email;
     private String username;
     private String role;
+    // private String password;
+    private ClientDTO client;
     private AdminDTO admin;
 }
