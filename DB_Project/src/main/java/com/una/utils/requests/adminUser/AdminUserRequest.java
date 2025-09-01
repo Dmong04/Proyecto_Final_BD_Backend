@@ -1,4 +1,4 @@
-package com.una.utils.requests;
+package com.una.utils.requests.adminUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -36,9 +36,19 @@ public class UserService {
         return UserMapper.toDTO(user);
     }
 
+    // Métodos de admin
     public void saveAdminUser(String name, String email, String username, String password) {
         userRepository.pa_admin_insert(name, email, username, password);
     }
+
+    public void updateAdminUser(Integer id, String name, String email, String username, String password) {
+        userRepository.pa_admin_update(id, name, email, username, password);
+    }
+
+    public void deleteAdminUser(Integer id) {
+        userRepository.pa_admin_delete(id);
+    }
+    // Métodos de admin
 
     public void saveClientUser(String name, String phone, String email, String username, String password) {
         userRepository.pa_client_insert(name, phone, email, username, password);
