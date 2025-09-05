@@ -1,14 +1,6 @@
 package com.una.controllers;
 
-import com.una.dto.PassengerDTO;
-import com.una.dto.TourDTO;
-import com.una.services.PassengerService;
-import com.una.services.TourService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("coco_tours/api/v2/passengers")

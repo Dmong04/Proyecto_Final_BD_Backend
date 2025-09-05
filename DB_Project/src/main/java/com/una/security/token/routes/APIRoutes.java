@@ -17,7 +17,10 @@ public class APIRoutes {
             "/coco_tours/api/v2/reservation/**",
             "/coco_tours/api/v2/supplier/**",
             "/coco_tours/api/v2/tours/**",
-            "/coco_tours/api/v2/user/**"
+            "/coco_tours/api/v2/user/**",
+            "/coco_tours/api/v2/user/admin/**",
+            "/coco_tours/api/v2/user/client/delete/update",
+            "/coco_tours/api/v2/user/client/delete/delete"
     );
 
     public final List<String> clientRoutes = List.of(

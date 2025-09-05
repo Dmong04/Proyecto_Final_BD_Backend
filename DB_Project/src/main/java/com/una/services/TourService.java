@@ -30,13 +30,17 @@ public class TourService {
         return tourRepository.findByType(type).map(TourMapper::toDTO);
     }
 
-    public TourDTO createTour(TourDTO dto) {
+    public void insertTour(TourDTO dto) {
         Tour tour = TourMapper.toEntity(dto);
-        tour = tourRepository.save(tour);
-        return TourMapper.toDTO(tour);
+        tourRepository.pa_tour_insert(tour.getType(),  tour.getDescription(), tour.getPrice());
+    }
+
+    public void updateTour(TourDTO dto) {
+        Tour tour = TourMapper.toEntity(dto);
+        tourRepository.pa_tour_update(tour.getId(), tour.getType(), tour.getDescription(), tour.getPrice());
     }
 
     public void deleteTourById(Integer id) {
-        tourRepository.deleteById(id);
+        tourRepository.pa_tour_delete(id);
     }
 }
