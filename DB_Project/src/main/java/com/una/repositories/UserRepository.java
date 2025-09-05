@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    public Optional<User> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
     @Procedure(name = "pa_admin_insert")
     void pa_admin_insert(@Param("name") String name, @Param("email") String email,

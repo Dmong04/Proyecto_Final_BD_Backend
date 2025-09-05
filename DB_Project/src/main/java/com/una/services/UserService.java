@@ -2,7 +2,6 @@ package com.una.services;
 
 import com.una.dto.UserDTO;
 import com.una.mappers.UserMapper;
-import com.una.models.User;
 import com.una.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,12 +29,6 @@ public class UserService {
         return userRepository.findById(id).map(UserMapper::toDTO);
     }
 
-    public UserDTO createUser(UserDTO dto) {
-        User user = UserMapper.toEntity(dto);
-        user = userRepository.save(user);
-        return UserMapper.toDTO(user);
-    }
-
     // Métodos de admin
     public void saveAdminUser(String name, String email, String username, String password) {
         userRepository.pa_admin_insert(name, email, username, password);
@@ -50,11 +43,17 @@ public class UserService {
     }
     // Métodos de admin
 
+    // Métodos de client
     public void saveClientUser(String name, String phone, String email, String username, String password) {
         userRepository.pa_client_insert(name, phone, email, username, password);
     }
 
-    public void deleteUser(Integer id) {
-        userRepository.deleteById(id);
+    public void updateClientUser(Integer id, String name, String phone, String email, String username, String password) {
+        userRepository.pa_client_update(id, name, phone, email, username, password);
     }
+
+    public void deleteClientUser(Integer id) {
+        userRepository.pa_client_delete(id);
+    }
+    // Métodos de client
 }
