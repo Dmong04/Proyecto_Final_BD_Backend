@@ -1,10 +1,10 @@
 package com.una.controllers;
 
-import com.una.utils.requests.adminUser.AdminUserRequest;
+import com.una.utils.requests.adminUser.AddAdminUserRequest;
 import com.una.dto.UserDTO;
 import com.una.services.UserService;
 import com.una.utils.GenericResponse;
-import com.una.utils.requests.clientUser.ClientUserRequest;
+import com.una.utils.requests.clientUser.AddClientUserRequest;
 import com.una.utils.requests.adminUser.UpdateAdminUserRequest;
 import com.una.utils.requests.clientUser.UpdateClientUserRequest;
 import org.springframework.http.HttpStatus;
@@ -53,7 +53,7 @@ public class UserController {
 
     /**
     * Obtiene al usuario consultado por su nombre de usaurio
-    * @return Información envuelta de su usaurio y cliente/administrador en {@link GenericResponse}.
+    * @return Información envuelta de su usuario y cliente/administrador en {@link GenericResponse}.
      * Retorna un 404 en caso de no existir el usuario.
     * */
     @GetMapping("/{username}")
@@ -80,12 +80,12 @@ public class UserController {
     /**
      * Endpoints para gestión de usuarios administradores.
      * Crea un usuario administrador mediante un procedimiento almacenado en la base de datos
-     * que emplea un proceso maestro de usuario y persona administradora al enviarse una {@link AdminUserRequest}.
+     * que emplea un proceso maestro de usuario y persona administradora al enviarse una {@link AddAdminUserRequest}.
      * @return Mensaje de confirmación en la creación del usuario envuelto en {@link GenericResponse}.
      * Retorna un 400 en caso de fallar la creación
      * */
     @PostMapping("/admin")
-    public ResponseEntity<GenericResponse<UserDTO>> createAdminUser(@RequestBody AdminUserRequest request) {
+    public ResponseEntity<GenericResponse<UserDTO>> createAdminUser(@RequestBody AddAdminUserRequest request) {
         try {
             Optional<UserDTO> found = service.findUserByUsername(request.getUsername());
             GenericResponse<UserDTO> response = new GenericResponse<>();
@@ -136,7 +136,7 @@ public class UserController {
     }
 
     /**
-     * Elimina al usuario administrador seleccionado por identificador.
+     * Elimina al usuario administrador seleccionado por identificador {@link Integer id}.
      * @return Mensaje de confirmación de la eliminación exitosa del usuario envuelto en {@link GenericResponse}.
      * Retorna un 400 en caso de fallar la eliminación.*/
     @DeleteMapping("/admin/delete/{id}")
@@ -163,11 +163,11 @@ public class UserController {
 
     /**
      * Endpoints para gestión de usuarios clientes. Crea un usuario administrador mediante un procedimiento almacenado
-     * en la base de datos que emplea un proceso maestro de usuario y persona cliente al enviarse una {@link ClientUserRequest}.
+     * en la base de datos que emplea un proceso maestro de usuario y persona cliente al enviarse una {@link AddClientUserRequest}.
      * @return Mensaje de confirmación en la creación del usuario envuelto en {@link GenericResponse}.
      * Retorna un 400 en caso de fallar la creación*/
     @PostMapping("/client")
-    public ResponseEntity<GenericResponse<UserDTO>> createClientUser(@RequestBody ClientUserRequest request) {
+    public ResponseEntity<GenericResponse<UserDTO>> createClientUser(@RequestBody AddClientUserRequest request) {
         try {
             Optional<UserDTO> found = service.findUserByUsername(request.getUsername());
             GenericResponse<UserDTO> response = new GenericResponse<>();
@@ -220,7 +220,7 @@ public class UserController {
     }
 
     /**
-     * Elimina al usuario cliente seleccionado por identificador.
+     * Elimina al usuario cliente seleccionado por identificador {@link Integer id}.
      * @return Mensaje de confirmación de la eliminación exitosa del usuario envuelto en {@link GenericResponse}.
      * Retorna un 400 en caso de fallar la eliminación.*/
     @DeleteMapping("/client/delete/{id}")
