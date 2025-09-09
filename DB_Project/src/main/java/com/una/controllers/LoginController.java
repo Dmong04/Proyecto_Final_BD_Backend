@@ -5,6 +5,7 @@ import com.una.dto.LoginResponseDTO;
 import com.una.models.User;
 import com.una.repositories.UserRepository;
 import com.una.security.token.JwtService;
+import com.una.utils.GenericResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +27,13 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDTO dto) {
+    public ResponseEntity<GenericResponse<LoginResponseDTO>> login(@RequestBody LoginDTO dto) {
         try {
             Optional<User> found = userRepository.findByUsername(dto.getUsername());
+            GenericResponse<LoginResponseDTO> response = new GenericResponse<>();
             if (found.isEmpty() || !found.get().getPassword().equals(dto.getPassword())) {
-                return ResponseEntity.badRequest().body("Usuario o contraseña incorrectos");
+                return response.buildResponse(null, false,
+                        "Usuario o contraseña incorrectos", HttpStatus.UNAUTHORIZED);
             }
             User user = found.get();
             String token = jwtService.generateToken(user.getUsername(), user.getRole());
@@ -40,13 +43,19 @@ public class LoginController {
             } else {
                 name = user.getAdmin().getName();
             }
-            return ResponseEntity.ok(new LoginResponseDTO(name, user.getUsername(), user.getRole(), token));
+            var logged = new LoginResponseDTO(name, user.getUsername(), user.getRole(), token);
+            return response.buildResponse(logged, true,
+                    "Inicio de sesión exitoso",
+                    HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            GenericResponse<LoginResponseDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // Método para validar al usuario
+    // Método para validar al usuario // Solamente de prueba
     @GetMapping("/whoami")
     public ResponseEntity<String> whoami(Authentication authentication) {
         try {

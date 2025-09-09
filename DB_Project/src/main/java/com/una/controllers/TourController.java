@@ -3,6 +3,8 @@ package com.una.controllers;
 import com.una.utils.GenericResponse;
 import com.una.dto.TourDTO;
 import com.una.services.TourService;
+import com.una.utils.requests.tours.AddTourRequest;
+import com.una.utils.requests.tours.UpdateTourRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,10 @@ public class TourController {
     public TourController(TourService service) {
         this.service = service;
     }
-
+/**
+ * Obtiene todos los tours registrados en el sistema.
+ * @return Lista de tours envuelta en {@link GenericResponse}.
+ * Retorna 204 si no hay tours*/
     @GetMapping("/all")
     public ResponseEntity<GenericResponse<List<TourDTO>>> getAllTours() {
         try {
@@ -41,6 +46,10 @@ public class TourController {
         }
     }
 
+    /**
+     * Obtiene un tour por medio de su identificador.
+     * @return Información completa del tour envuelta en {@link GenericResponse}.
+     * Retorna 404 en caso de no existir el tour*/
     @GetMapping("/{id}")
     public ResponseEntity<GenericResponse<TourDTO>> getTourById(@PathVariable Integer id) {
         try {
@@ -62,17 +71,22 @@ public class TourController {
         }
     }
 
+    /**
+     * Crea un tour mediante un procedimiento almacenado en la base de datos.
+     * con la información solicitadda en {@link AddTourRequest}.
+     * @return Mensaje de confirmación en la creación del tour envuelto en {@link GenericResponse}.
+     * Retorna un 404 en caso de fallar la transacción.*/
     @PostMapping
-    public ResponseEntity<GenericResponse<TourDTO>> createTour(@RequestBody TourDTO dto) {
+    public ResponseEntity<GenericResponse<TourDTO>> createTour(@RequestBody AddTourRequest request) {
         try {
-            Optional<TourDTO> found = service.getTourByType(dto.getType());
+            Optional<TourDTO> found = service.getTourByType(request.getType());
             GenericResponse<TourDTO> response = new GenericResponse<>();
             if (found.isPresent()) {
                 return response.buildResponse(found.get(), false,
                         "La creación del tour no fue exitosa, ya existe un tour llamado: " + found.get().getType(),
                         HttpStatus.BAD_REQUEST);
             }
-            service.insertTour(dto);
+            service.insertTour(request.getType(), request.getDescription(), request.getPrice());
             return response.buildResponse(null, true,
                     "Creación del tour exitosa",
                     HttpStatus.CREATED);
@@ -84,8 +98,13 @@ public class TourController {
         }
     }
 
+    /**
+     * Actualiza la información de un tour seleccionado mediante un procedimiento almacenado
+     * en la base de datos, al enviarse los datos en una {@link UpdateTourRequest}.
+     * @return Mensaje de confirmación en la actualización del tour seleccionado envuelto en {@link GenericResponse}.
+     * Retorna un 404 en caso de fallar la transacción.*/
     @PutMapping("/{id}")
-    public ResponseEntity<GenericResponse<TourDTO>> updateTour(@PathVariable Integer id, @RequestBody TourDTO dto) {
+    public ResponseEntity<GenericResponse<TourDTO>> updateTour(@PathVariable Integer id, @RequestBody UpdateTourRequest request) {
         try {
             Optional<TourDTO> found = service.getTourById(id);
             GenericResponse<TourDTO> response = new GenericResponse<>();
@@ -94,7 +113,7 @@ public class TourController {
                         "No se pudo actualizar el registro",
                         HttpStatus.BAD_REQUEST);
             }
-            service.updateTour(dto);
+            service.updateTour(id, request.getType(), request.getDescription(), request.getPrice());
             return response.buildResponse(null, true,
                     "La actualización del registro ha sido exitosa",
                     HttpStatus.OK);
@@ -106,6 +125,10 @@ public class TourController {
         }
     }
 
+    /**
+     * Elimina el tour seleccionado mediante su identificador {@link Integer id}
+     * @return Mensaje de confirmación en la eliminación del tour seleccionado envuelto en {@link GenericResponse}.
+     * Retorna un 400 en caso de fallar la transación*/
     @DeleteMapping("/{id}")
     public ResponseEntity<GenericResponse<TourDTO>> deleteTourById(@PathVariable Integer id) {
         try {
@@ -113,8 +136,8 @@ public class TourController {
             GenericResponse<TourDTO> response = new GenericResponse<>();
             if (found.isEmpty()) {
                 return response.buildResponse(null, false,
-                        "El registro no se encontró",
-                        HttpStatus.NOT_FOUND);
+                        "El tour seleccionado no existe",
+                        HttpStatus.BAD_REQUEST);
             }
             service.deleteTourById(id);
             return response.buildResponse(found.get(), true,

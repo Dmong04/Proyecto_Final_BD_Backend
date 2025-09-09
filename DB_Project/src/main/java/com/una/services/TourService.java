@@ -30,14 +30,12 @@ public class TourService {
         return tourRepository.findByType(type).map(TourMapper::toDTO);
     }
 
-    public void insertTour(TourDTO dto) {
-        Tour tour = TourMapper.toEntity(dto);
-        tourRepository.pa_tour_insert(tour.getType(),  tour.getDescription(), tour.getPrice());
+    public void insertTour(String type, String description, Integer price) {
+        tourRepository.pa_tour_insert(type, description, price);
     }
 
-    public void updateTour(TourDTO dto) {
-        Tour tour = TourMapper.toEntity(dto);
-        tourRepository.pa_tour_update(tour.getId(), tour.getType(), tour.getDescription(), tour.getPrice());
+    public void updateTour(Integer id, String type, String description, Integer price) {
+        tourRepository.pa_tour_update(id, type, description, price);
     }
 
     public void deleteTourById(Integer id) {
