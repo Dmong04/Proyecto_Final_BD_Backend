@@ -1,4 +1,4 @@
-package com.una.dto;
+package com.una.utils.requests.detailTour;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetailTourDTO {
-    private Integer id;
+public class AddDetailTourRequest {
     private String origin;
     private String destination;
-    private TourDTO tour;
-    private ReservationDTO reservations;
-    private SupplierDTO provider;
+    private Integer tour;
+    private Integer reservations;
+    private Integer provider;
 }

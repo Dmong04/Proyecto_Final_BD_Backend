@@ -1,4 +1,4 @@
-package com.una.dto;
+package com.una.utils.requests.reservations;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,13 +10,9 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservationDTO {
-    private Integer id;
+public class UpdateReservationRequest {
     private LocalDate date;
     private LocalTime time;
     private String description;
-    private Integer tourPrice;
-    private Integer extraPrice;
-    private Integer total;
-    private UserDTO user;
+    private Integer user_id;
 }

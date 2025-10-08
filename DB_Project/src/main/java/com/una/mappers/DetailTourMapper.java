@@ -11,8 +11,9 @@ public interface DetailTourMapper {
         dto.setId(detailTour.getId());
         dto.setOrigin(detailTour.getOrigin());
         dto.setDestination(detailTour.getDestination());
-        dto.setTour(TourMapper.toDTO(detailTour.getTour()));
-        dto.setProvider(SupplierMapper.toDTO(detailTour.getSupplier()));
+        dto.setTour(detailTour.getTour() != null ? TourMapper.toDTO(detailTour.getTour()) : null);
+        dto.setReservations(detailTour.getReservations() != null ? ReservationMapper.toDTO(detailTour.getReservations()) : null);
+        dto.setProvider(detailTour.getSupplier() != null ? SupplierMapper.toDTO(detailTour.getSupplier()) : null);
         return dto;
     }
 
@@ -21,12 +22,10 @@ public interface DetailTourMapper {
         detailTour.setId(dto.getId());
         detailTour.setOrigin(dto.getOrigin());
         detailTour.setDestination(dto.getDestination());
-        if (dto.getTour() != null) {
-            detailTour.setTour(TourMapper.toEntity(dto.getTour()));
-        }
-        if (dto.getProvider() != null) {
-            detailTour.setSupplier(SupplierMapper.toEntity(dto.getProvider()));
-        }
+        detailTour.setTour(dto.getTour() != null ? TourMapper.toEntity(dto.getTour()) : null);
+        detailTour.setReservations(dto.getReservations() != null ? ReservationMapper.toEntity(dto.getReservations()) : null);
+        detailTour.setSupplier(dto.getProvider() != null ? SupplierMapper.toEntity(dto.getProvider()) : null);
+
         return detailTour;
     }
 }

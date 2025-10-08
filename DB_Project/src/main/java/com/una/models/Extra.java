@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -21,7 +22,7 @@ public class Extra {
     @Column(name = "description")
     private String description;
     @Column(name = "unit_price")
-    private Integer price;
+    private BigDecimal price;
     @OneToMany(mappedBy = "extra")
     private List<DetailExtra> detailsExtra;
 }

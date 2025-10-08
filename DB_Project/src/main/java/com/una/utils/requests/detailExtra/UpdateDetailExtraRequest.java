@@ -1,4 +1,4 @@
-package com.una.dto;
+package com.una.utils.requests.detailExtra;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TourDTO {
-    private Integer id;
-    private String type;
-    private String description;
+public class UpdateDetailExtraRequest {
+    private int participants;
     private BigDecimal price;
+    private Integer extra;
+    private Integer reservations;
 }

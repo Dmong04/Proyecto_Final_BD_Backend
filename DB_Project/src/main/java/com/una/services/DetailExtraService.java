@@ -29,13 +29,23 @@ public class DetailExtraService {
         return detailExtraRepository.findById(id).map(DetailExtraMapper::toDTO);
     }
 
-    public DetailExtraDTO createExtraDetail(DetailExtraDTO dto) {
-        DetailExtra detailExtra = DetailExtraMapper.toEntity(dto);
-        detailExtra = detailExtraRepository.save(detailExtra);
-        return DetailExtraMapper.toDTO(detailExtra);
+    public Optional<DetailExtraDTO> findByExtraAndReservations(Integer extra_id, Integer reservation_id) {
+        return detailExtraRepository.findByExtraAndReservations(extra_id, reservation_id).map(DetailExtraMapper::toDTO);
+    }
+
+//    public Optional<DetailExtraDTO> findExtraDetailByReservation(Integer id) {
+//        return detailExtraRepository.findByReservation(id).map(DetailExtraMapper::toDTO);
+//    }
+
+    public void insertDetailExtra(Integer person_count, Integer extra_id, Integer reservation_id) {
+        detailExtraRepository.pa_extra_details_reservation_insert(person_count, extra_id, reservation_id);
+    }
+
+    public void updateDetailExtra(Integer id, Integer person_count, Integer extra_id) {
+        detailExtraRepository.pa_extra_details_reservation_update(id, person_count, extra_id);
     }
 
     public void deleteExtraDetailById(Integer id) {
-        detailExtraRepository.deleteById(id);
+        detailExtraRepository.pa_extra_details_reservation_delete(id);
     }
 }

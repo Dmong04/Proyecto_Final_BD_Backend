@@ -12,6 +12,7 @@ public interface DetailExtraMapper {
         dto.setParticipants(detailExtra.getParticipants());
         dto.setPrice(detailExtra.getPrice());
         dto.setExtra(ExtraMapper.toDTO(detailExtra.getExtra()));
+        dto.setReservations(detailExtra.getReservations() != null ? ReservationMapper.toDTO(detailExtra.getReservations()) : null);
         return dto;
     }
 
@@ -28,6 +29,8 @@ public interface DetailExtraMapper {
         } else {
             detailExtra.setExtra(null);
         }
+        detailExtra.setReservations(dto.getReservations() != null ? ReservationMapper.toEntity(dto.getReservations()) : null);
         return detailExtra;
+
     }
 }

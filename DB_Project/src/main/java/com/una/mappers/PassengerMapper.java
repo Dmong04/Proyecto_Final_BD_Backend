@@ -10,7 +10,7 @@ public interface PassengerMapper {
         dto.setId(passenger.getId());
         dto.setName(passenger.getName());
         dto.setAge(passenger.getAge());
-        dto.setDetailTour(DetailTourMapper.toDTO(passenger.getDetails()));
+        dto.setTour_detail(DetailTourMapper.toDTO(passenger.getTour_detail()));
         return dto;
     }
 
@@ -20,7 +20,7 @@ public interface PassengerMapper {
         passenger.setId(dto.getId());
         passenger.setName(dto.getName());
         passenger.setAge(dto.getAge());
-        passenger.setDetails(DetailTourMapper.toEntity(dto.getDetailTour()));
+        passenger.setTour_detail(DetailTourMapper.toEntity(dto.getTour_detail()));
         return passenger;
     }
 }

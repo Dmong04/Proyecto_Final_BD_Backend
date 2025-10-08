@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "detalle_viaje")
+@Table(name = "tour_detail")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -24,10 +24,11 @@ public class DetailTour {
     @JoinColumn(name = "tour_id")
     private Tour tour;
     @ManyToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservations;
+    @ManyToOne
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
-    @OneToMany(mappedBy = "details", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tour_detail", cascade = CascadeType.ALL)
     private List<Passenger> passengers;
-    @OneToMany(mappedBy = "detailTour")
-    private List<Reservation> reservations;
 }

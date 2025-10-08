@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 public class DetailExtraDTO {
     private Integer id;
     private int participants;
-    private Integer price;
+    private BigDecimal price;
     private ExtraDTO extra;
+    private ReservationDTO reservations;
 }

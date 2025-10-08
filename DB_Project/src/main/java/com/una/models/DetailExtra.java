@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,11 @@ public class DetailExtra {
     @Column(name = "person_count")
     private int participants;
     @Column(name = "total_price")
-    private Integer price;
+    private BigDecimal price;
     @ManyToOne
     @JoinColumn(name = "extra_id")
     private Extra extra;
-    @OneToMany(mappedBy = "detailExtra")
-    private List<Reservation> reservations;
+    @ManyToOne
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservations;
 }

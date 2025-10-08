@@ -1,7 +1,13 @@
 package com.una.controllers;
 
 import com.una.dto.ReservationDTO;
+import com.una.dto.SupplierDTO;
 import com.una.services.ReservationService;
+import com.una.utils.GenericResponse;
+import com.una.utils.requests.reservations.AddReservationRequest;
+import com.una.utils.requests.reservations.UpdateReservationRequest;
+import com.una.utils.requests.suppliers.AddSupplierRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,43 +25,112 @@ public class ReservationController {
     }
 
     @GetMapping("/all")
-    public List<ReservationDTO> getAllReservations() {
-        return service.getAllreservations();
+    public ResponseEntity<GenericResponse<List<ReservationDTO>>> getAllReservations() {
+        try {
+            GenericResponse<List<ReservationDTO>> response = new GenericResponse<>();
+            List<ReservationDTO> reservations = service.getAllReservations();
+            if (reservations.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "El listado de reservaciones está vacío",
+                        HttpStatus.NO_CONTENT);
+            }
+            return response.buildResponse(reservations, true,
+                    "Se desplegó el listado correctamente",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<List<ReservationDTO>> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReservationDTO> getReservationById(@PathVariable Integer id) {
-        return service.findReservationById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<GenericResponse<ReservationDTO>> getReservationById(@PathVariable Integer id) {
+        try {
+            Optional<ReservationDTO> reservation = service.findReservationById(id);
+            GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            if (reservation.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "No se ha encontrado la reservación con el ID seleccionado",
+                        HttpStatus.NOT_FOUND);
+            }
+            return response.buildResponse(reservation.get(), true,
+                    "Se encontró la reservación con el ID seleccionado",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
+
     @PostMapping
-    public ResponseEntity<ReservationDTO> createReservation(@RequestBody ReservationDTO dto) {
-        return ResponseEntity.ok(service.createReservation(dto));
+    public ResponseEntity<GenericResponse<ReservationDTO>> createReservation(@RequestBody AddReservationRequest request) {
+        try {
+            Optional<ReservationDTO> found = service.findReservationByDateTime(request.getDate(), request.getTime());
+            GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            if (found.isPresent()) {
+                return response.buildResponse(found.get(), false,
+                        "La creación de la reservacion no fue exitosa, ya existe un reservacion ",
+                        HttpStatus.BAD_REQUEST);
+            }
+            service.insertReservation(request.getDate(), request.getTime(), request.getDescription(), request.getUser_id());
+            return response.buildResponse(null, true,
+                    "Creación de la reservacion exitosa",
+                    HttpStatus.CREATED);
+        } catch (Exception e) {
+            GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ReservationDTO> updateReservation(@PathVariable Integer id, @RequestBody ReservationDTO dto) {
-        return service.findReservationById(id)
-                .map(reservation -> {
-                    reservation.setDate(dto.getDate());
-                    reservation.setTime(dto.getTime());
-                    reservation.setDescription(dto.getDescription());
-                    reservation.setDetailExtra(dto.getDetailExtra());
-                    reservation.setDetailTour(dto.getDetailTour());
-                    return ResponseEntity.ok(service.createReservation(reservation));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<GenericResponse<ReservationDTO>> updateReservation(@PathVariable Integer id, @RequestBody UpdateReservationRequest request) {
+        try {
+            Optional<ReservationDTO> found = service.findReservationById(id);
+            GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            if (found.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "No se pudo actualizar la reservación",
+                        HttpStatus.BAD_REQUEST);
+            }
+            service.updateReservation(id, request.getDate(), request.getTime(), request.getDescription(), request.getUser_id());
+            return response.buildResponse(null, true,
+                    "La actualización de la reservación ha sido exitosa",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ReservationDTO> deleteReservationById(@PathVariable Integer id) {
-        Optional<ReservationDTO> found = service.findReservationById(id);
-        if (found.isEmpty()) {
-            ResponseEntity.notFound().build();
+    public ResponseEntity<GenericResponse<ReservationDTO>> deleteReservationById(@PathVariable Integer id) {
+        try {
+            Optional<ReservationDTO> found = service.findReservationById(id);
+            GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            if (found.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "La reservación seleccionada no existe",
+                        HttpStatus.BAD_REQUEST);
+            }
+            service.deleteReservationById(id);
+            return response.buildResponse(found.get(), true,
+                    "Se eliminó la reservación exitosamente",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        service.deleteReservationById(id);
-        return ResponseEntity.ok().build();
     }
 }
