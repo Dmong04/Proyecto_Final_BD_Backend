@@ -6,19 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "passengers")
+@Table(name = "supplier_phones")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Passenger {
+public class SupplierPhones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "age")
-    private Integer age;
+    @Column(name = "phone")
+    private String phone;
     @ManyToOne
-    @JoinColumn(name = "tour_detail_id")
-    private DetailTour tour_detail;
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 }

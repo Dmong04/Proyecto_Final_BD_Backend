@@ -5,7 +5,10 @@ import com.una.mappers.ReservationMapper;
 import com.una.models.Reservation;
 import com.una.repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +21,7 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
-    public List<ReservationDTO> getAllreservations() {
+    public List<ReservationDTO> getAllReservations() {
         return reservationRepository.findAll().stream().map(ReservationMapper::toDTO).toList();
     }
 
@@ -26,13 +29,22 @@ public class ReservationService {
         return reservationRepository.findById(id).map(ReservationMapper::toDTO);
     }
 
-    public ReservationDTO createReservation(ReservationDTO dto) {
-        Reservation reservation = ReservationMapper.toEntity(dto);
-        reservation = reservationRepository.save(reservation);
-        return ReservationMapper.toDTO(reservation);
+    public Optional<ReservationDTO> findReservationByDateTime(LocalDate date, LocalTime time) {
+        return reservationRepository.findByDateAndTime(date, time).map(ReservationMapper::toDTO);
     }
 
+    @Transactional
+    public void insertReservation(LocalDate date, LocalTime time, String description, Integer user_id) {
+        reservationRepository.pa_reservation_insert(date, time, description, user_id);
+    }
+
+    @Transactional
+    public void updateReservation(Integer id, LocalDate date, LocalTime time, String description, Integer user_id) {
+        reservationRepository.pa_reservation_update(id, date, time, description, user_id);
+    }
+
+    @Transactional
     public void deleteReservationById(Integer id) {
-        reservationRepository.deleteById(id);
+        reservationRepository.pa_reservation_delete(id);
     }
 }

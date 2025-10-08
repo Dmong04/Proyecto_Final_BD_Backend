@@ -6,6 +6,7 @@ import com.una.models.Tour;
 import com.una.repositories.TourRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +31,19 @@ public class TourService {
         return tourRepository.findByType(type).map(TourMapper::toDTO);
     }
 
-    public void insertTour(String type, String description, Integer price) {
+//    public void SearchAllTour() {
+//        tourRepository.pa_tour_search_all();
+//    }
+//
+//    public void SearchByIdTour(Integer id ) {
+//        tourRepository.pa_tour_search_by_id(id);
+//    }
+
+    public void insertTour(String type, String description, BigDecimal price) {
         tourRepository.pa_tour_insert(type, description, price);
     }
 
-    public void updateTour(Integer id, String type, String description, Integer price) {
+    public void updateTour(Integer id, String type, String description, BigDecimal price) {
         tourRepository.pa_tour_update(id, type, description, price);
     }
 

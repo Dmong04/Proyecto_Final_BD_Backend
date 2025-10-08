@@ -1,7 +1,14 @@
 package com.una.controllers;
 
 import com.una.dto.ExtraDTO;
+import com.una.dto.SupplierDTO;
 import com.una.services.ExtraService;
+import com.una.utils.GenericResponse;
+import com.una.utils.requests.extras.AddExtraRequest;
+import com.una.utils.requests.extras.UpdateExtraRequest;
+import com.una.utils.requests.suppliers.AddSupplierRequest;
+import com.una.utils.requests.suppliers.UpdateSupplierRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,47 +26,131 @@ public class ExtraController {
     }
 
     @GetMapping("/all")
-    public List<ExtraDTO> getAllExtras() {
-        return service.getAllExtras();
+    public ResponseEntity<GenericResponse<List<ExtraDTO>>> getAllExtras() {
+        try {
+            GenericResponse<List<ExtraDTO>> response = new GenericResponse<>();
+            List<ExtraDTO> extras = service.searchAllExtra();
+            if (extras.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "El listado de extras está vacío",
+                        HttpStatus.NO_CONTENT);
+            }
+            return response.buildResponse(extras, true,
+                    "Se desplegó el listado correctamente",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<List<ExtraDTO>> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ExtraDTO> getExtraById(@PathVariable Integer id) {
-        return service.findExtraById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<GenericResponse<ExtraDTO>> getExtraById(@PathVariable Integer id) {
+        try {
+            Optional<ExtraDTO> extra = service.findExtraById(id);
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            if (extra.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "No se ha encontrado el extra con el ID seleccionado",
+                        HttpStatus.NOT_FOUND);
+            }
+            return response.buildResponse(extra.get(), true,
+                    "Se encontró el extra con el ID seleccionado",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/name/{name}")
+    public ResponseEntity<GenericResponse<ExtraDTO>> getExtraByName(@PathVariable String name) {
+        try {
+            Optional<ExtraDTO> found = service.findExtraByName(name);
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            if (found.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "El extra no existe",
+                        HttpStatus.NOT_FOUND);
+            }
+            return response.buildResponse(found.get(), true,
+                    "Se encontró el extra en los registros",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping
-    public ExtraDTO createExtra(@RequestBody ExtraDTO dto) {
-        Optional<ExtraDTO> found = service.findExtraByName(dto.getName());
-        if (found.isPresent()) {
-            ResponseEntity.badRequest().build();
-            return null;
+    public ResponseEntity<GenericResponse<ExtraDTO>> createSupplier(@RequestBody AddExtraRequest request) {
+        try {
+            Optional<ExtraDTO> found = service.findExtraByName(request.getName());
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            if (found.isPresent()) {
+                return response.buildResponse(found.get(), false,
+                        "La creación del extra no fue exitosa, ya existe un extra llamado: " + found.get().getName(),
+                        HttpStatus.BAD_REQUEST);
+            }
+            service.insertExtra(request.getName(), request.getDescription(), request.getPrice());
+            return response.buildResponse(null, true,
+                    "Creación del extra exitosa",
+                    HttpStatus.CREATED);
+        } catch (Exception e) {
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        ResponseEntity.ok();
-        return service.createExtra(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ExtraDTO> updateExtra(@PathVariable Integer id, @RequestBody ExtraDTO dto) {
-        return service.findExtraById(id)
-                .map(extra -> {
-                    extra.setName(dto.getName());
-                    extra.setDescription(dto.getDescription());
-                    extra.setPrice(dto.getPrice());
-                    return ResponseEntity.ok(service.createExtra(extra));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<GenericResponse<ExtraDTO>> updateExtra(@PathVariable Integer id, @RequestBody UpdateExtraRequest request) {
+        try {
+            Optional<ExtraDTO> found = service.findExtraById(id);
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            if (found.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "No se pudo actualizar el registro",
+                        HttpStatus.BAD_REQUEST);
+            }
+            service.updateExtra(id, request.getName(), request.getDescription(), request.getPrice());
+            return response.buildResponse(null, true,
+                    "La actualización del registro ha sido exitosa",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ExtraDTO> deleteExtraById(@PathVariable Integer id) {
-        Optional<ExtraDTO> found = service.findExtraById(id);
-        if (found.isEmpty()) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<GenericResponse<ExtraDTO>> deleteExtraById(@PathVariable Integer id) {
+        try {
+            Optional<ExtraDTO> found = service.findExtraById(id);
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            if (found.isEmpty()) {
+                return response.buildResponse(null, false,
+                        "El extra seleccionado no existe",
+                        HttpStatus.BAD_REQUEST);
+            }
+            service.deleteExtraById(id);
+            return response.buildResponse(found.get(), true,
+                    "Se eliminó el registro exitosamente",
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            GenericResponse<ExtraDTO> response = new GenericResponse<>();
+            return response.buildResponse(null, false,
+                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        service.deleteExtraById(id);
-        return ResponseEntity.ok().build();
     }
+
 }

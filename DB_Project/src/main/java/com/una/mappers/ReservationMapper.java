@@ -16,8 +16,6 @@ public interface ReservationMapper {
         dto.setTourPrice(reservation.getTourPrice());
         dto.setExtraPrice(reservation.getExtraPrice());
         dto.setTotal(reservation.getTotal());
-        dto.setDetailExtra(DetailExtraMapper.toDTO(reservation.getDetailExtra()));
-        dto.setDetailTour(DetailTourMapper.toDTO(reservation.getDetailTour()));
         dto.setUser(UserMapper.toDTO(reservation.getUser()));
         return dto;
     }
@@ -29,8 +27,6 @@ public interface ReservationMapper {
         reservation.setDate(dto.getDate());
         reservation.setTime(dto.getTime());
         reservation.setDescription(dto.getDescription());
-        reservation.setDetailExtra(DetailExtraMapper.toEntity(dto.getDetailExtra()));
-        reservation.setDetailTour(DetailTourMapper.toEntity(dto.getDetailTour()));
         reservation.setUser(UserMapper.toEntity(dto.getUser()));
         return reservation;
     }

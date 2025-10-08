@@ -6,6 +6,7 @@ import com.una.models.DetailTour;
 import com.una.repositories.DetailTourRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,13 +27,19 @@ public class DetailTourService {
         return detailTourRepository.findById(id).map(DetailTourMapper::toDTO);
     }
 
-    public DetailTourDTO createDetail(DetailTourDTO dto) {
-        DetailTour detail = DetailTourMapper.toEntity(dto);
-        detail = detailTourRepository.save(detail);
-        return DetailTourMapper.toDTO(detail);
+    public Optional<DetailTourDTO> findDetailByOrigin(String origin) {
+        return detailTourRepository.findByOrigin(origin).map(DetailTourMapper::toDTO);
+    }
+
+    public void insertDetailTour(String origin, String destination, Integer tour_id, Integer reservation_id) {
+        detailTourRepository.pa_tour_details_reservation_insert(origin, destination, tour_id, reservation_id);
+    }
+
+    public void updateDetailTour(Integer id, String origin, String destination, Integer tour_id, Integer reservation_id) {
+        detailTourRepository.pa_tour_details_reservation_update(id, origin, destination, tour_id, reservation_id);
     }
 
     public void deleteDetailById(Integer id) {
-        detailTourRepository.deleteById(id);
+        detailTourRepository.pa_tour_details_reservation_delete(id);
     }
 }

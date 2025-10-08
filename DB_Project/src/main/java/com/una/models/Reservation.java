@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
-@Table(name = "reservas")
+@Table(name = "reservations")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -30,12 +31,10 @@ public class Reservation {
     @Column(name = "total", insertable = false, updatable = false)
     private Integer total;
     @ManyToOne
-    @JoinColumn(name = "extra_detail_id")
-    private DetailExtra detailExtra;
-    @ManyToOne
-    @JoinColumn(name = "tour_detail_id")
-    private DetailTour detailTour;
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(mappedBy = "reservations")
+    private List<DetailTour> details;
+    @OneToMany(mappedBy = "reservations")
+    private List<DetailExtra> extraDetails;
 }
