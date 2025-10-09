@@ -13,6 +13,7 @@ import java.util.Optional;
 @Repository
 public interface ExtraRepository extends JpaRepository<Extra, Integer> {
     public Optional<Extra> findExtraByName(String name);
+    public Optional<Extra> findByName(String name);
 
     @Procedure(name = "pa_extra_search_all")
     List<Extra> pa_extra_search_all();

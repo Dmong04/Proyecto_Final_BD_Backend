@@ -1,3 +1,4 @@
+
 package com.una.security.token;
 
 import com.una.models.User;
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -30,39 +32,59 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private APIRoutes routes;
-    @Autowired
-    private PathMatcher pathMatcher;
+    
+    private final PathMatcher pathMatcher = new AntPathMatcher();
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+    
+        System.out.println("=== JWT Filter - Request received ===");
+        System.out.println("Request URI: " + request.getRequestURI());
+        System.out.println("Request Method: " + request.getMethod());
+        
         String authPath = request.getServletPath();
         if (authPath.equals("/coco_tours/api/v2/auth/login")) {
+            System.out.println("Login path - skipping filter");
             filterChain.doFilter(request, response);
             return;
         }
+        
         String authHeader = request.getHeader("Authorization");
+        System.out.println("Authorization header: " + (authHeader != null ? authHeader.substring(0, Math.min(20, authHeader.length())) + "..." : "null"));
+        
         String token = null;
         String username = null;
         String role = null;
+        
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            System.out.println("No valid Authorization header found");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write("{\"error\": \"Token no proporcionado o formato inválido\"}");
             return;
         }
+        
         token = authHeader.substring(7);
+        System.out.println("Token extracted, length: " + token.length());
+        
         try {
             username = jwtService.extractUsername(token);
             role = jwtService.extractRole(token);
+            System.out.println("DEBUG - Username: " + username);
+            System.out.println("DEBUG - Role: " + role);
+            System.out.println("DEBUG - Request URI: " + request.getRequestURI());
         } catch (Exception e) {
+            System.out.println("Token validation failed: " + e.getMessage());
+            e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            response.getWriter().write("{\"error\": \"Token inválido o expirado\"}");
+            response.getWriter().write("{\"error\": \"Token invalido o expirado\"}");
             return;
         }
+        
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             Optional<User> userOpt = userRepository.findByUsername(username);
             if (userOpt.isPresent() && jwtService.validateToken(token, username)) {
@@ -72,24 +94,31 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                 user.getUsername(), null, List.of());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                System.out.println("Authentication set for user: " + username);
+            } else {
+                System.out.println("User not found or token invalid");
             }
         }
+        
         if (!isRouteAllowedForRole(request.getRequestURI(), role)) {
+            System.out.println("DEBUG - Access DENIED for role: " + role + " to URI: " + request.getRequestURI());
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write("{\"error\": \"Acceso denegado para el rol: " + role + "\"}");
             return;
         }
+        
+        System.out.println("DEBUG - Access GRANTED for role: " + role + " to URI: " + request.getRequestURI());
         filterChain.doFilter(request, response);
     }
-
+    
     private boolean isRouteAllowedForRole(String requestURI, String role) {
-        List<String> allowedRoutes = "ADMIN".equals(role) ? routes.getAdminRoutes()
-                : "CLIENT".equals(role) ? routes.getClientRoutes()
+        List<String> allowedRoutes = "ADMIN".equals(role) ? routes.adminRoutes
+                : "CLIENT".equals(role) ? routes.clientRoutes
                 : List.of();
 
         return allowedRoutes.stream()
                 .anyMatch(pattern -> pathMatcher.match(pattern, requestURI));
-    };
+    }
 }

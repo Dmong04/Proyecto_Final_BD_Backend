@@ -1,13 +1,11 @@
+
 package com.una.controllers;
 
 import com.una.dto.ExtraDTO;
-import com.una.dto.SupplierDTO;
 import com.una.services.ExtraService;
 import com.una.utils.GenericResponse;
 import com.una.utils.requests.extras.AddExtraRequest;
 import com.una.utils.requests.extras.UpdateExtraRequest;
-import com.una.utils.requests.suppliers.AddSupplierRequest;
-import com.una.utils.requests.suppliers.UpdateSupplierRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("coco_tours/api/v2/extra")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ExtraController {
 
     private final ExtraService service;
@@ -27,21 +26,35 @@ public class ExtraController {
 
     @GetMapping("/all")
     public ResponseEntity<GenericResponse<List<ExtraDTO>>> getAllExtras() {
+        System.out.println("=== GET ALL EXTRAS - Controller reached ===");
+        GenericResponse<List<ExtraDTO>> response = new GenericResponse<>();
+        
         try {
-            GenericResponse<List<ExtraDTO>> response = new GenericResponse<>();
+            System.out.println("Calling service.searchAllExtra()...");
             List<ExtraDTO> extras = service.searchAllExtra();
-            if (extras.isEmpty()) {
+            System.out.println("Service returned " + (extras != null ? extras.size() : "null") + " extras");
+            
+            if (extras == null || extras.isEmpty()) {
+                System.out.println("No extras found, returning NO_CONTENT");
                 return response.buildResponse(null, false,
                         "El listado de extras está vacío",
                         HttpStatus.NO_CONTENT);
             }
+            
+            System.out.println("Returning " + extras.size() + " extras with OK status");
             return response.buildResponse(extras, true,
                     "Se desplegó el listado correctamente",
                     HttpStatus.OK);
+                    
         } catch (Exception e) {
-            GenericResponse<List<ExtraDTO>> response = new GenericResponse<>();
+            System.err.println("=== ERROR in getAllExtras ===");
+            System.err.println("Error type: " + e.getClass().getName());
+            System.err.println("Error message: " + e.getMessage());
+            System.err.println("Stack trace:");
+            e.printStackTrace();
+            
             return response.buildResponse(null, false,
-                    "Hubo un error en el proceso, inténtelo nuevamente más tarde: " + e.getMessage(),
+                    "Hubo un error en el proceso: " + e.getClass().getSimpleName() + " - " + e.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -66,6 +79,7 @@ public class ExtraController {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
     @GetMapping("/name/{name}")
     public ResponseEntity<GenericResponse<ExtraDTO>> getExtraByName(@PathVariable String name) {
         try {
@@ -152,5 +166,4 @@ public class ExtraController {
                     HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }
