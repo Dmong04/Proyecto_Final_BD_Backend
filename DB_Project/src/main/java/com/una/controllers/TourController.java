@@ -28,6 +28,8 @@ public class TourController {
     @GetMapping("/all")
     public ResponseEntity<GenericResponse<List<TourDTO>>> getAllTours() {
         try {
+            System.out.println("=== GET ALL TOURS REQUEST ===");
+            System.out.println("Endpoint hit: /coco_tours/api/v2/tours/all");
             GenericResponse<List<TourDTO>> response = new GenericResponse<>();
             List<TourDTO> tours = service.getAllTours();
             if (tours.isEmpty()) {
