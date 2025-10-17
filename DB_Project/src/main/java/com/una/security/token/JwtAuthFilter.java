@@ -38,14 +38,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-    
-        System.out.println("=== JWT Filter - Request received ===");
-        System.out.println("Request URI: " + request.getRequestURI());
-        System.out.println("Request Method: " + request.getMethod());
         
         String authPath = request.getServletPath();
         if (authPath.equals("/coco_tours/api/v2/auth/login")) {
-            System.out.println("Login path - skipping filter");
             filterChain.doFilter(request, response);
             return;
         }
@@ -72,11 +67,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         try {
             username = jwtService.extractUsername(token);
             role = jwtService.extractRole(token);
-            System.out.println("DEBUG - Username: " + username);
-            System.out.println("DEBUG - Role: " + role);
-            System.out.println("DEBUG - Request URI: " + request.getRequestURI());
         } catch (Exception e) {
-            System.out.println("Token validation failed: " + e.getMessage());
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
@@ -94,14 +85,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                 user.getUsername(), null, List.of());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-                System.out.println("Authentication set for user: " + username);
             } else {
                 System.out.println("User not found or token invalid");
             }
         }
         
         if (!isRouteAllowedForRole(request.getRequestURI(), role)) {
-            System.out.println("DEBUG - Access DENIED for role: " + role + " to URI: " + request.getRequestURI());
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
