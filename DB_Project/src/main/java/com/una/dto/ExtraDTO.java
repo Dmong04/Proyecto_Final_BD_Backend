@@ -14,6 +14,6 @@ public class ExtraDTO {
     private Integer id;
     private String name;
     private String description;
-    private BigDecimal price;
+    private Integer price;
     private Integer supplierId;
 }
