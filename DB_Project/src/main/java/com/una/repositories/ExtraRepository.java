@@ -23,11 +23,11 @@ public interface ExtraRepository extends JpaRepository<Extra, Integer> {
 
     @Procedure(name = "pa_extra_insert")
     void pa_extra_insert(@Param("name") String name, @Param("description") String description,
-                            @Param("unit_price") BigDecimal unit_price);
+                            @Param("unit_price") Integer unit_price);
 
     @Procedure(name = "pa_extra_update")
     void pa_extra_update(@Param("extra_id") Integer extra_id, @Param("new_name") String new_name, @Param("new_description") String new_description,
-                         @Param("new_price") BigDecimal new_price);
+                         @Param("new_price") Integer new_price);
 
     @Procedure(name = "pa_extra_delete")
     void pa_extra_delete(@Param("extra_id") Integer extra_id);

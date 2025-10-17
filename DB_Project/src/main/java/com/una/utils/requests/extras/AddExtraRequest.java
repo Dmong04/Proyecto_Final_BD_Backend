@@ -12,5 +12,5 @@ import java.math.BigDecimal;
 public class AddExtraRequest {
     private String name;
     private String description;
-    private BigDecimal price;
+    private Integer price;
 }
