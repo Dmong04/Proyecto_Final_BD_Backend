@@ -4,7 +4,7 @@ package com.una.mappers;
 import com.una.dto.ExtraDTO;
 import com.una.models.Extra;
 
-public class ExtraMapper {
+public interface ExtraMapper {
     
     public static ExtraDTO toDTO(Extra extra) {
         if (extra == null) {
