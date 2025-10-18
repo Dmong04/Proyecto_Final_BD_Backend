@@ -29,14 +29,4 @@ public class ClientService {
     public Optional<ClientDTO> getClientByName(String name) {
         return clientRepository.findByName(name).map(ClientMapper::toDTO);
     }
-
-    public ClientDTO createClient(ClientDTO dto) {
-        Client client = ClientMapper.toEntity(dto);
-        client = clientRepository.save(client);
-        return ClientMapper.toDTO(client);
-    }
-
-    public void deleteClientById(Integer id) {
-        clientRepository.deleteById(id);
-    }
 }

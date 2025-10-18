@@ -29,14 +29,4 @@ public class AdminService {
     public Optional<AdminDTO> findAdminByName(String name) {
         return adminRepository.findByName(name).map(AdminMapper::toDTO);
     }
-
-    public AdminDTO createAdmin(AdminDTO dto) {
-        Admin admin = AdminMapper.toEntity(dto);
-        admin = adminRepository.save(admin);
-        return AdminMapper.toDTO(admin);
-    }
-
-    public void deleteAdminById(Integer id) {
-        adminRepository.deleteById(id);
-    }
 }
