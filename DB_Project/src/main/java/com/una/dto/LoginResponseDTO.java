@@ -1,22 +1,16 @@
 package com.una.dto;
 
-import com.una.models.User;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginResponseDTO {
-    @Getter
+    private Integer user_id;
     private String name;
-    @Getter
     private String username;
-    @Getter
     private String role;
-    @Getter
     private String token;
-
-    public LoginResponseDTO(String name, String username, String role, String token) {
-        this.name = name;
-        this.username = username;
-        this.role = role;
-        this.token = token;
-    }
 }

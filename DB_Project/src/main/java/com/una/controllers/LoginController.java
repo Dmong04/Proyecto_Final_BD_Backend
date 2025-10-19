@@ -7,6 +7,7 @@ import com.una.models.User;
 import com.una.repositories.UserRepository;
 import com.una.security.token.JwtService;
 import com.una.utils.GenericResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping("/coco_tours/api/v2/auth")
 public class LoginController {
@@ -39,22 +41,18 @@ public class LoginController {
             
             User user = found.get();
             String token = jwtService.generateToken(user.getUsername(), user.getRole());
-            
-            // Log the token generation
-            System.out.println("=== LOGIN SUCCESS ===");
-            System.out.println("Username: " + user.getUsername());
-            System.out.println("Role: " + user.getRole());
-            System.out.println("Token: " + token.substring(0, 20) + "...");
-            
             String name;
-            
             if (user.getAdmin() == null) {
                 name = user.getClient().getName();
             } else {
                 name = user.getAdmin().getName();
             }
-            
-            var logged = new LoginResponseDTO(name, user.getUsername(), user.getRole(), token);
+            var logged = new LoginResponseDTO();
+            logged.setUser_id(user.getId());
+            logged.setName(name);
+            logged.setUsername(user.getUsername());
+            logged.setRole(user.getRole());
+            logged.setToken(token);
             return response.buildResponse(logged, true,
                     "Inicio de sesión exitoso",
                     HttpStatus.OK);

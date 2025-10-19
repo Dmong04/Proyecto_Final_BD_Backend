@@ -1,12 +1,10 @@
 package com.una.controllers;
 
 import com.una.dto.ReservationDTO;
-import com.una.dto.SupplierDTO;
 import com.una.services.ReservationService;
 import com.una.utils.GenericResponse;
 import com.una.utils.requests.reservations.AddReservationRequest;
 import com.una.utils.requests.reservations.UpdateReservationRequest;
-import com.una.utils.requests.suppliers.AddSupplierRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -71,11 +69,12 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<GenericResponse<ReservationDTO>> createReservation(@RequestBody AddReservationRequest request) {
         try {
-            Optional<ReservationDTO> found = service.findReservationByDateTime(request.getDate(), request.getTime());
             GenericResponse<ReservationDTO> response = new GenericResponse<>();
+            Optional<ReservationDTO> found = service.findReservationByDateTime(request.getDate(), request.getTime());
             if (found.isPresent()) {
                 return response.buildResponse(found.get(), false,
-                        "La creación de la reservacion no fue exitosa, ya existe un reservacion ",
+                        "La creación de la reservacion no fue exitosa, " +
+                                "ya existe un reservación para esta franja horaria",
                         HttpStatus.BAD_REQUEST);
             }
             service.insertReservation(request.getDate(), request.getTime(), request.getDescription(), request.getUser_id());

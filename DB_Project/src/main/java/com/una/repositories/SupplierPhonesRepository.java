@@ -1,13 +1,13 @@
 package com.una.repositories;
 
 import com.una.models.SupplierPhones;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface SupplierPhonesRepository {
+public interface SupplierPhonesRepository extends JpaRepository<SupplierPhones, Integer> {
 
-    List<SupplierPhones> findByClientName(String name);
+    List<SupplierPhones> findBySupplier_Name(String name);
 }
