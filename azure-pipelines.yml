@@ -12,10 +12,13 @@ variables:
   azureSubscription: 'dbabd411-8d3e-428a-a667-dd9fdc4ec895'
 
   # Web app name
-  webAppName: ''
+  webAppName: 'cocotours-api'  # ← Asegúrate de que coincida con tu App Service
 
   # Environment name
-  environmentName: ''
+  environmentName: 'production'
+
+  # Resource group name
+  resourceGroupName: 'rg-springboot-api'  # ← Asegúrate de que coincida con tu grupo de recursos
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -66,10 +69,27 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: AzureAppServiceSettings@1
+            displayName: 'Set App Settings'
+            inputs:
+              azureSubscription: $(azureSubscription)
+              appName: $(webAppName)
+              resourceGroupName: $(resourceGroupName)
+              appSettings: |
+                [
+                  {
+                    "name": "SQL_PASSWORD",
+                    "value": "$(SQL_PASSWORD)",
+                    "slotSetting": false
+                  }
+                ]
+
           - task: AzureWebApp@1
-            displayName: 'Azure Web App Deploy: '
+            displayName: 'Azure Web App Deploy'
             inputs:
               azureSubscription: $(azureSubscription)
               appType: webAppLinux
               appName: $(webAppName)
               package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
+              runtimeStack: 'JAVA|17-java17'
+              deploymentMethod: 'auto'
