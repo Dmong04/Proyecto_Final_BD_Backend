@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/vistas")
-@CrossOrigin(origins = "*")
+@RequestMapping("coco_tours/api/v2/vistas")
 public class ViewsController {
 
     private final ViewsService viewsService;
