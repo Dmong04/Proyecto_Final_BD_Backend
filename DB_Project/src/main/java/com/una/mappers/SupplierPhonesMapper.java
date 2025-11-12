@@ -1,11 +1,9 @@
 package com.una.mappers;
 
-import com.una.dto.SupplierDTO;
 import com.una.dto.SupplierPhonesDTO;
 import com.una.models.SupplierPhones;
 
 public interface SupplierPhonesMapper {
-
     static SupplierPhonesDTO toDTO(SupplierPhones supplierPhones) {
         if (supplierPhones == null)
             return null;
@@ -13,6 +11,16 @@ public interface SupplierPhonesMapper {
         dto.setId(supplierPhones.getId());
         dto.setPhone(supplierPhones.getPhone());
         dto.setSupplier(SupplierMapper.toDTO(supplierPhones.getSupplier()));
+        return dto;
+    }
+
+    static SupplierPhonesDTO toDTOWithoutSupplier(SupplierPhones supplierPhones) {
+        if (supplierPhones == null)
+            return null;
+        SupplierPhonesDTO dto = new SupplierPhonesDTO();
+        dto.setId(supplierPhones.getId());
+        dto.setPhone(supplierPhones.getPhone());
+        // No setSupplier to avoid circular dependency
         return dto;
     }
 
