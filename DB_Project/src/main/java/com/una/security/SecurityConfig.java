@@ -2,6 +2,7 @@
 package com.una.security;
 
 import com.una.security.token.JwtAuthFilter;
+import com.una.security.token.routes.APIRoutes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
     private final CorsConfigurationSource corsConfigurationSource;
+    private final APIRoutes apiRoutes;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -30,6 +32,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/coco_tours/api/v2/auth/login").permitAll()
+                        .requestMatchers("/coco_tours/api/v2/tours/all").permitAll()
+                        .requestMatchers("/coco_tours/api/v2/extra/all").permitAll()
+                        .requestMatchers("/coco_tours/api/v2/passengers/**").permitAll()
+                        .requestMatchers("/coco_tours/api/v2/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
