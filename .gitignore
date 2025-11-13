@@ -17,6 +17,4 @@ Thumbs.db
 # Spring Boot
 *.log
 .spring-boot-devtools.properties
-application.properties
 application.yml
-.env
